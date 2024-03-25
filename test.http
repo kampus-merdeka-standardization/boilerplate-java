@@ -1,0 +1,21 @@
+GRAPHQL http://localhost:8080/graphql
+
+query pingPong{
+    response{
+        message
+    }
+}
+
+###
+
+GET http://localhost:8080/ping
+Accept: application/json
+
+###
+GRPC localhost:9090/PingController/Ping
+
+{
+  "request": "hi"
+}
+
+###
