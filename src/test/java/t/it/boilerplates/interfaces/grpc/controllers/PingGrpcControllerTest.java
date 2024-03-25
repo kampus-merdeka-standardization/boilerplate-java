@@ -5,18 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import t.it.boilerplates.PingRequest;
 import t.it.boilerplates.PongResponse;
 import t.it.boilerplates.applications.services.PingService;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+@DirtiesContext
 @Slf4j
-@SpringBootTest
 @SpringJUnitConfig(PingGrpcController.class)
 class PingGrpcControllerTest {
     @Autowired
@@ -24,11 +22,6 @@ class PingGrpcControllerTest {
 
     @MockBean
     private PingService pingService;
-
-    @Configuration
-    public static class PingGrpcControllerConfigTest {
-
-    }
 
     @Test
     void testPing() {

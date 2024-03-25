@@ -5,12 +5,14 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.annotation.DirtiesContext;
 import t.it.boilerplates.PongResponse;
 import t.it.boilerplates.domains.entities.Pong;
 import t.it.boilerplates.domains.repositories.PingRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DirtiesContext
 @SpringBootTest
 class PingServiceTest {
     @MockBean

@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.graphql.GraphQlTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.graphql.test.tester.GraphQlTester;
+import org.springframework.test.annotation.DirtiesContext;
 import t.it.boilerplates.PongResponse;
 import t.it.boilerplates.applications.services.PingService;
 
 
+@DirtiesContext
 @GraphQlTest(PingGraphQlController.class)
 class PingGraphQlControllerTest {
     @Autowired
