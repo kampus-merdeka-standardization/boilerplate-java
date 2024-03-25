@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "t.it.boilerplates";
+option java_multiple_files = true;
+
+service PingController{
+  rpc Ping(PingRequest) returns (PongResponse);
+}
+
+message PingRequest {
+  string request = 1;
+}
+
+message PongResponse {
+  string message = 1;
+}
