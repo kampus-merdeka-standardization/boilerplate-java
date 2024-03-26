@@ -55,15 +55,20 @@ public class ProductServiceImpl implements ProductService {
 
         Optional.ofNullable(product).ifPresent(item -> {
             log.info("before update product : {}", product);
-            Optional.ofNullable(updateSomeProductFields.name()).ifPresent(item::setName);
-            Optional.ofNullable(updateSomeProductFields.category()).ifPresent(item::setCategory);
+            Optional.ofNullable(updateSomeProductFields.name()).ifPresent(name -> {
+                if (!name.isBlank()) item.setName(name);
+            });
+            Optional.ofNullable(updateSomeProductFields.category()).ifPresent(category -> {
+                if (!category.isBlank()) item.setCategory(category);
+            });
             Optional.ofNullable(updateSomeProductFields.price()).ifPresent(price -> {
-                        if (price > 0L) item.setPrice(price);
-                    }
-            );
-            Optional.ofNullable(updateSomeProductFields.description()).ifPresent(item::setDescription);
+                if (price > 0L) item.setPrice(price);
+            });
+            Optional.ofNullable(updateSomeProductFields.description()).ifPresent(description -> {
+                if (!description.isBlank()) item.setDescription(description);
+            });
             Optional.ofNullable(updateSomeProductFields.updatedAt()).ifPresent(updatedAt -> {
-                if(updatedAt > 0L)
+                if (updatedAt > 0L)
                     item.setUpdatedAt(LocalDateTime.ofInstant(Instant.ofEpochMilli(updatedAt), ZoneOffset.UTC));
             });
             log.info("after update product : {}", product);

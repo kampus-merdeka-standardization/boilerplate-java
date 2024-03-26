@@ -8,12 +8,6 @@ import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
 
 @Configuration
 public class AppConfig {
-    // to convert automatically protobuf object to json
-
-    @Bean
-    public ProtobufHttpMessageConverter protobufHttpMessageConverter() {
-        return new ProtobufHttpMessageConverter();
-    }
 
     @Bean
     public RuntimeWiringConfigurer runtimeWiringConfigurer() {

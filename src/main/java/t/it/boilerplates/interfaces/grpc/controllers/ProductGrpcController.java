@@ -8,10 +8,7 @@ import t.it.boilerplates.controllers.ProductControllerGrpc;
 import t.it.boilerplates.interfaces.models.requests.AddProductRequest;
 import t.it.boilerplates.interfaces.models.requests.UpdateAllProductFieldRequest;
 import t.it.boilerplates.interfaces.models.requests.UpdateSomeProductFieldsRequest;
-import t.it.boilerplates.models.requests.AddProduct;
-import t.it.boilerplates.models.requests.Empty;
-import t.it.boilerplates.models.requests.ProductId;
-import t.it.boilerplates.models.requests.UpdateProduct;
+import t.it.boilerplates.models.requests.*;
 import t.it.boilerplates.models.responses.AddedProduct;
 import t.it.boilerplates.models.responses.AddedProducts;
 import t.it.boilerplates.models.responses.ProductDetail;
@@ -33,6 +30,7 @@ public class ProductGrpcController extends ProductControllerGrpc.ProductControll
                     .updatedAt(request.getUpdatedAt())
                     .description(request.getDescription())
                     .build();
+            System.out.println(request);
             final var addedProductResponse = productService.addProduct(addProductRequest);
             responseObserver.onNext(AddedProduct.newBuilder().setId(addedProductResponse.id())
                     .setName(addedProductResponse.name())
@@ -57,7 +55,7 @@ public class ProductGrpcController extends ProductControllerGrpc.ProductControll
     }
 
     @Override
-    public void updateSomeFields(UpdateProduct request, StreamObserver<AddedProduct> responseObserver) {
+    public void updateSome(UpdateSomeProductFields request, StreamObserver<AddedProduct> responseObserver) {
         try {
             final var updateSomeProductFieldsRequest = UpdateSomeProductFieldsRequest.builder()
                     .id(request.getId())
@@ -76,7 +74,7 @@ public class ProductGrpcController extends ProductControllerGrpc.ProductControll
     }
 
     @Override
-    public void updateAllFields(UpdateProduct request, StreamObserver<AddedProduct> responseObserver) {
+    public void updateAll(UpdateAllProductFields request, StreamObserver<AddedProduct> responseObserver) {
         try {
             final var updateAllProductFieldsRequest = UpdateAllProductFieldRequest.builder()
                     .id(request.getId())
