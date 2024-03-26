@@ -25,9 +25,20 @@ public class ProductGrpcController extends ProductControllerGrpc.ProductControll
     @Override
     public void add(AddProduct request, StreamObserver<AddedProduct> responseObserver) {
         try {
-            final var addProductRequest = AddProductRequest.builder().name(request.getName()).price(request.getPrice()).category(request.getCategory()).createdAt(request.getCreatedAt()).updatedAt(request.getUpdatedAt()).description(request.getDescription()).build();
+            final var addProductRequest = AddProductRequest.builder()
+                    .name(request.getName())
+                    .price(request.getPrice())
+                    .category(request.getCategory())
+                    .createdAt(request.getCreatedAt())
+                    .updatedAt(request.getUpdatedAt())
+                    .description(request.getDescription())
+                    .build();
             final var addedProductResponse = productService.addProduct(addProductRequest);
-            responseObserver.onNext(AddedProduct.newBuilder().setId(addedProductResponse.id()).setName(addedProductResponse.name()).setPrice(addedProductResponse.price()).setCategory(addedProductResponse.category()).build());
+            responseObserver.onNext(AddedProduct.newBuilder().setId(addedProductResponse.id())
+                    .setName(addedProductResponse.name())
+                    .setPrice(addedProductResponse.price())
+                    .setCategory(addedProductResponse.category())
+                    .build());
             responseObserver.onCompleted();
         } catch (Exception exception) {
             responseObserver.onError(exception);
