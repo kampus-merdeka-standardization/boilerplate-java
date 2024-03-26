@@ -18,7 +18,7 @@ public record UpdateAllProductFieldRequest(
         Long price,
         @NotBlank(message = "category must be filled")
         String category,
-        @NotNull(message = "created at must be filled")
+        @NotNull(message = "updated at must be filled")
         Long updatedAt,
         @NotBlank(message = "description must be filled")
         String description
