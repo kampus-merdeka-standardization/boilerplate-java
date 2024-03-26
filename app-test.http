@@ -17,7 +17,7 @@ GRPC localhost:9090/ProductController/Add
 }
 
 ###
-GRPC localhost:9090/ProductController/Get
+GRPC localhost:9090/ProductController/GetAll
 
 ###
 GRPC localhost:9090/ProductController/GetById

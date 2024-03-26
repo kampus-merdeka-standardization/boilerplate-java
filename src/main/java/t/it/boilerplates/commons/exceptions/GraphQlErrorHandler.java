@@ -9,13 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.graphql.data.method.annotation.GraphQlExceptionHandler;
 import org.springframework.graphql.execution.ErrorType;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
 @Slf4j
-@RestControllerAdvice
+@ControllerAdvice
 public class GraphQlErrorHandler {
     @GraphQlExceptionHandler({ConstraintViolationException.class})
     public GraphQLError constraintViolationException(ConstraintViolationException constraintViolationException) {
