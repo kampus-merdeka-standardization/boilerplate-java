@@ -1,7 +1,60 @@
+scalar Long
+
 type Query {
     response: PongResponse!
+    findAllProducts: [AddedProductResponse!]!
+    getProductById(id: ID!): ProductDetailResponse!
 }
 
 type PongResponse {
     message: String!
+}
+
+type Mutation{
+    addProduct(addProductRequest: AddProductRequest!): AddedProductResponse!
+    updateSomeProductFieldsById(id: ID!, updateSomeProductFieldsRequest: UpdateSomeProductFieldsRequest): AddedProductResponse!
+    updateAllProductFieldsById(id: ID!, updateAllProductFieldsRequest: UpdateAllProductFieldsRequest): AddedProductResponse!
+    deleteProductById(id: ID!): String
+}
+
+input AddProductRequest{
+    name: String!,
+    price: Long!,
+    category: String!,
+    createdAt: Long!,
+    updatedAt: Long!,
+    description: String!
+}
+
+type AddedProductResponse{
+    id: String,
+    name: String,
+    price: Long,
+    category: String
+}
+
+type ProductDetailResponse{
+    id: String,
+    name: String,
+    price: Long,
+    category: String,
+    createdAt: Long,
+    updatedAt: Long,
+    description: String
+}
+
+input UpdateSomeProductFieldsRequest{
+    name: String
+    price: Long
+    category: String
+    updatedAt: Long
+    description: String
+}
+
+input UpdateAllProductFieldsRequest{
+    name: String!
+    price: Long!
+    category: String!
+    updatedAt: Long!
+    description: String!
 }
