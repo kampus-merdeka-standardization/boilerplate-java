@@ -17,8 +17,10 @@ public record AddProductRequest(
         @NotBlank(message = "category must be filled")
         String category,
         @NotNull(message = "updated at must be filled")
+        @Min(value = 1L, message = "the updated at ${validatedValue} must be greater than 0")
         Long updatedAt,
         @NotNull(message = "created at must be filled")
+        @Min(value = 1L, message = "the created at ${validatedValue} must be greater than 0")
         Long createdAt,
         @NotBlank(message = "description must be filled")
         String description

@@ -19,6 +19,7 @@ public record UpdateAllProductFieldRequest(
         @NotBlank(message = "category must be filled")
         String category,
         @NotNull(message = "updated at must be filled")
+        @Min(value = 1L, message = "the updated at ${validatedValue} must be greater than 0")
         Long updatedAt,
         @NotBlank(message = "description must be filled")
         String description

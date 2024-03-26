@@ -27,22 +27,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public AddedProductResponse addProduct(AddProductRequest addProductRequest) {
-        final Product product = Product.builder()
-                .name(addProductRequest.name())
-                .price(addProductRequest.price())
-                .createdAt(LocalDateTime.ofInstant(Instant.ofEpochMilli(addProductRequest.createdAt()), ZoneOffset.UTC))
-                .updatedAt(LocalDateTime.ofInstant(Instant.ofEpochMilli(addProductRequest.updatedAt()), ZoneOffset.UTC))
-                .description(addProductRequest.description())
-                .category(addProductRequest.category())
-                .build();
+        final Product product = Product.builder().name(addProductRequest.name()).price(addProductRequest.price()).createdAt(LocalDateTime.ofInstant(Instant.ofEpochMilli(addProductRequest.createdAt()), ZoneOffset.UTC)).updatedAt(LocalDateTime.ofInstant(Instant.ofEpochMilli(addProductRequest.updatedAt()), ZoneOffset.UTC)).description(addProductRequest.description()).category(addProductRequest.category()).build();
         String generatedId = productRepository.addNewProduct(product);
 
-        return AddedProductResponse.builder()
-                .id(generatedId)
-                .name(product.getName())
-                .price(addProductRequest.price())
-                .category(addProductRequest.category())
-                .build();
+        return AddedProductResponse.builder().id(generatedId).name(product.getName()).price(addProductRequest.price()).category(addProductRequest.category()).build();
     }
 
     @Override
@@ -57,12 +45,7 @@ public class ProductServiceImpl implements ProductService {
 
         productRepository.updateProduct(product);
 
-        return AddedProductResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .category(product.getCategory())
-                .build();
+        return AddedProductResponse.builder().id(product.getId()).name(product.getName()).price(product.getPrice()).category(product.getCategory()).build();
     }
 
     @Override
@@ -74,44 +57,32 @@ public class ProductServiceImpl implements ProductService {
             log.info("before update product : {}", product);
             Optional.ofNullable(updateSomeProductFields.name()).ifPresent(item::setName);
             Optional.ofNullable(updateSomeProductFields.category()).ifPresent(item::setCategory);
-            Optional.ofNullable(updateSomeProductFields.price()).ifPresent(item::setPrice);
+            Optional.ofNullable(updateSomeProductFields.price()).ifPresent(price -> {
+                        if (price > 0L) item.setPrice(price);
+                    }
+            );
             Optional.ofNullable(updateSomeProductFields.description()).ifPresent(item::setDescription);
-            Optional.ofNullable(updateSomeProductFields.updatedAt()).ifPresent(updatedAt -> item.setUpdatedAt(LocalDateTime.ofInstant(Instant.ofEpochMilli(updatedAt), ZoneOffset.UTC)));
+            Optional.ofNullable(updateSomeProductFields.updatedAt()).ifPresent(updatedAt -> {
+                if(updatedAt > 0L)
+                    item.setUpdatedAt(LocalDateTime.ofInstant(Instant.ofEpochMilli(updatedAt), ZoneOffset.UTC));
+            });
             log.info("after update product : {}", product);
         });
 
         productRepository.updateProduct(product);
 
-        return AddedProductResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .category(product.getCategory())
-                .build();
+        return AddedProductResponse.builder().id(product.getId()).name(product.getName()).price(product.getPrice()).category(product.getCategory()).build();
     }
 
     @Override
     public ProductDetailResponse getProductById(String id) {
         final var product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "product is not found"));
-        return ProductDetailResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .createdAt(product.getCreatedAt().toEpochSecond(ZoneOffset.UTC))
-                .updatedAt(product.getUpdatedAt().toEpochSecond(ZoneOffset.UTC))
-                .description(product.getDescription())
-                .category(product.getCategory())
-                .build();
+        return ProductDetailResponse.builder().id(product.getId()).name(product.getName()).price(product.getPrice()).createdAt(product.getCreatedAt().toEpochSecond(ZoneOffset.UTC)).updatedAt(product.getUpdatedAt().toEpochSecond(ZoneOffset.UTC)).description(product.getDescription()).category(product.getCategory()).build();
     }
 
     @Override
     public List<AddedProductResponse> getProducts() {
-        return productRepository.getProducts().stream().map(product -> AddedProductResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .category(product.getCategory())
-                .build()).toList();
+        return productRepository.getProducts().stream().map(product -> AddedProductResponse.builder().id(product.getId()).name(product.getName()).price(product.getPrice()).category(product.getCategory()).build()).toList();
     }
 
     @Override
