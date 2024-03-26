@@ -24,6 +24,7 @@ class PingRestControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @DirtiesContext
     @Test
     void ping_ShouldSuccess() throws Exception {
         final var expectedPongJson = objectMapper.writeValueAsString(PongResponse.builder().message("pong").build());

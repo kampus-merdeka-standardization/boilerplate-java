@@ -20,6 +20,7 @@ class PingServiceTest {
     @Autowired
     private PingService pingService;
 
+    @DirtiesContext
     @Test
     void ping_ShouldSuccess() {
         Mockito.when(pingRepository.getPong()).thenReturn("pong");

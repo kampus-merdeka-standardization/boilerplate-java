@@ -13,6 +13,7 @@ class PingRepositoryTest {
     @Autowired
     private PingRepository pingRepository;
 
+    @DirtiesContext
     @Test
     void getPing_ShouldSuccess() {
         final var expectedOutput = "pong";

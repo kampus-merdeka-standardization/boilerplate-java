@@ -1,4 +1,4 @@
-query pingPong{
+query pingPong {
     response {
         message
     }

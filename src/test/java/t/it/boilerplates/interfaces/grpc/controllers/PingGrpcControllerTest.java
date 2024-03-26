@@ -25,6 +25,7 @@ class PingGrpcControllerTest {
     @MockBean
     private PingService pingService;
 
+    @DirtiesContext
     @Test
     void testPing() {
         Mockito.when(pingService.ping()).thenReturn(PongResponse.builder().message("pong").build());
