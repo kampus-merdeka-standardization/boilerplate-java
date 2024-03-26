@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import t.it.boilerplates.PingRequest;
-import t.it.boilerplates.PongResponse;
 import t.it.boilerplates.applications.services.PingService;
+import t.it.boilerplates.interfaces.models.responses.PongResponse;
+import t.it.boilerplates.models.requests.Ping;
+import t.it.boilerplates.models.responses.Pong;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DirtiesContext
@@ -25,15 +27,15 @@ class PingGrpcControllerTest {
 
     @Test
     void testPing() {
-        Mockito.when(pingService.ping()).thenReturn(PongResponse.newBuilder().setMessage("pong").build());
+        Mockito.when(pingService.ping()).thenReturn(PongResponse.builder().message("pong").build());
 
-        PingRequest ping = PingRequest.newBuilder().setRequest("ping").build();
-        StreamObserver<PongResponse> responseObserver = new StreamObserver<>() {
+        Ping ping = Ping.newBuilder().setMessage("ping").build();
+        StreamObserver<Pong> responseObserver = new StreamObserver<>() {
             @Override
-            public void onNext(PongResponse value) {
+            public void onNext(Pong value) {
                 log.info("got response: " + value.getMessage());
                 assertNotNull(value);
-                assertEquals(PongResponse.newBuilder()
+                assertEquals(Pong.newBuilder()
                         .setMessage("pong")
                         .build(), value);
             }
@@ -47,17 +49,17 @@ class PingGrpcControllerTest {
 
             }
         };
-        pingGrpcController.ping(ping, responseObserver);
+        pingGrpcController.request(ping, responseObserver);
     }
 
     @Test
     void testPing_ShouldThrowException() {
         Mockito.when(pingService.ping()).thenThrow(new RuntimeException("Fail to get response"));
 
-        PingRequest ping = PingRequest.newBuilder().setRequest("ping").build();
-        StreamObserver<PongResponse> responseObserver = new StreamObserver<>() {
+        Ping ping = Ping.newBuilder().setMessage("ping").build();
+        StreamObserver<t.it.boilerplates.models.responses.Pong> responseObserver = new StreamObserver<>() {
             @Override
-            public void onNext(PongResponse value) {
+            public void onNext(t.it.boilerplates.models.responses.Pong value) {
 
             }
 
@@ -70,6 +72,6 @@ class PingGrpcControllerTest {
 
             }
         };
-        assertThrows(RuntimeException.class, () -> pingGrpcController.ping(ping, responseObserver));
+        assertThrows(RuntimeException.class, () -> pingGrpcController.request(ping, responseObserver));
     }
 }

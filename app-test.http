@@ -1,7 +1,75 @@
-GRPC localhost:9090/PingController/Ping
+GRPC localhost:9090/PingController/Request
 
 {
   "request": "hi"
+}
+
+###
+GRPC localhost:9090/ProductController/Add
+
+{
+  "name": "indomie baru",
+  "price": 2000,
+  "created_at": 1711404465492,
+  "updated_at": 1711404465492,
+  "category": "food",
+  "description": "indomie karie"
+}
+
+###
+GRPC localhost:9090/ProductController/Get
+
+###
+GRPC localhost:9090/ProductController/GetById
+Content-Type: application/json
+
+{
+  "id": "5948c460-c20f-407e-b342-45156513471f"
+}
+
+###
+GRPC localhost:9090/ProductController/UpdateSomeFields
+Content-Type: application/json
+
+{
+  "id": "5948c460-c20f-407e-b342-45156513471f",
+  "name": "indomie goreng spesial",
+  "price": 21000,
+  "updated_at": 1711404465492,
+  "description": "indomie spesial"
+}
+
+###
+GRPC localhost:9090/ProductController/UpdateSomeFields
+Content-Type: application/json
+
+{
+  "id": "5948c460-c20f-407e-b342-45156513471f",
+  "name": "indomie goreng spesial",
+  "price": 21000,
+  "updated_at": 1711404465492,
+  "description": "indomie spesial"
+}
+
+###
+GRPC localhost:9090/ProductController/UpdateAllFields
+Content-Type: application/json
+
+{
+  "id": "5948c460-c20f-407e-b342-45156513471f",
+  "name": "indomie goreng spesial tiromiso mantap",
+  "price": 22000,
+  "updated_at": 1711404465492,
+  "category": "food",
+  "description": "indomie spesial"
+}
+
+###
+GRPC localhost:9090/ProductController/Remove
+Content-Type: application/json
+
+{
+  "id": "5948c460-c20f-407e-b342-45156513471f"
 }
 
 ###
@@ -48,6 +116,49 @@ query  {
 <> 2024-03-25T185908.200.json
 <> 2024-03-25T185831.200.json
 
+###
 
+POST http://localhost:8080/products
+Content-Type: application/json
 
+{
+  "name": "indomie goreng",
+  "price": 3000,
+  "created_at": 1711404465492,
+  "updated_at": 1711404465492,
+  "category": "food",
+  "description": "indomie rendang pedas"
+}
 
+###
+GET http://localhost:8080/products
+
+###
+GET http://localhost:8080/products/4c0224f9-2418-41af-a872-f6a88f4b40e2
+
+###
+PATCH http://localhost:8080/products/4c0224f9-2418-41af-a872-f6a88f4b40e2
+Content-Type: application/json
+
+{
+  "name": "indomie goreng spesial",
+  "price": 21000,
+  "updated_at": 1711404465492,
+  "description": "indomie spesial"
+}
+
+###
+PUT http://localhost:8080/products/95814a5d-1c09-4947-9c57-7d12d05cdb69
+Content-Type: application/json
+
+{
+  "name": "indomie goreng spesial tiromiso mantap",
+  "price": 22000,
+  "updated_at": 1711404465492,
+  "category": "food",
+  "description": "indomie spesial"
+}
+
+###
+DELETE http://localhost:8080/products/4c0224f9-2418-41af-a872-f6a88f4b40e2
+Content-Type: application/json

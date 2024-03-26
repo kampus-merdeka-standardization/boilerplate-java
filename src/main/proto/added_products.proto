@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "added_product.proto";
+
+option java_package = "t.it.boilerplates.models.responses";
+option java_multiple_files = true;
+
+message AddedProducts{
+  repeated AddedProduct products = 1;
+}
