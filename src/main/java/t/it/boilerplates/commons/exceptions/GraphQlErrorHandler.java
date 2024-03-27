@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @ControllerAdvice
@@ -24,7 +25,7 @@ public class GraphQlErrorHandler {
 
     @GraphQlExceptionHandler(ResponseStatusException.class)
     public GraphQLError responseStatusException(ResponseStatusException responseStatusException) {
-        return GraphQLError.newError().errorType(TRANSLATED_GRAPHQL_ERROR.get(responseStatusException.getStatusCode().value())).message(responseStatusException.getReason()).build();
+        return GraphQLError.newError().errorType(Optional.ofNullable(TRANSLATED_GRAPHQL_ERROR.get(responseStatusException.getStatusCode().value())).orElse(ErrorType.INTERNAL_ERROR)).message(responseStatusException.getReason()).build();
     }
 
     private static final Map<Integer, ErrorClassification> TRANSLATED_GRAPHQL_ERROR = Map.of(

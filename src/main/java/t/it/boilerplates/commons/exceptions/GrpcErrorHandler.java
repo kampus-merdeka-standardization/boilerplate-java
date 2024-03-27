@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @GrpcAdvice
@@ -21,9 +22,11 @@ public class GrpcErrorHandler {
     }
 
     @GrpcExceptionHandler(ResponseStatusException.class)
-    public Status responseStatusException(ResponseStatusException responseStatusException){
+    public Status responseStatusException(ResponseStatusException responseStatusException) {
         log.warn("Error", responseStatusException);
-        return TRANSLATED_GRPC_ERROR.get(responseStatusException.getStatusCode().value()).withDescription(responseStatusException.getReason()).withCause(responseStatusException);
+        return Optional.ofNullable(TRANSLATED_GRPC_ERROR.get(responseStatusException.getStatusCode().value()))
+                .orElse(Status.INTERNAL)
+                .withDescription(responseStatusException.getReason()).withCause(responseStatusException);
     }
 
     private static final Map<Integer, Status> TRANSLATED_GRPC_ERROR = Map.of(
