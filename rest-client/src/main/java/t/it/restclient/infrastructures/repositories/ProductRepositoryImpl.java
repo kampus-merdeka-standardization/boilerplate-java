@@ -1,7 +1,6 @@
 package t.it.restclient.infrastructures.repositories;
 
 import lombok.RequiredArgsConstructor;
-import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -10,7 +9,6 @@ import reactor.core.publisher.Mono;
 import t.it.restclient.domains.entities.Product;
 import t.it.restclient.domains.repositories.ProductRepository;
 
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 @Repository
