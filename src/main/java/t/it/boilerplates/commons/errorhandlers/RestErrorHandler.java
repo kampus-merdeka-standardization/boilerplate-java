@@ -1,4 +1,4 @@
-package t.it.boilerplates.commons.exceptions;
+package t.it.boilerplates.commons.errorhandlers;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -9,23 +9,34 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ResponseStatusException;
+import t.it.boilerplates.commons.exceptions.ApiException;
 import t.it.boilerplates.interfaces.models.responses.WebResponse;
 
 @Slf4j
 @RestControllerAdvice
 public class RestErrorHandler {
-    @ExceptionHandler({ConstraintViolationException.class})
+    @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<WebResponse<String>> constraintViolationException(ConstraintViolationException constraintViolationException) {
         log.warn("Error", constraintViolationException);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(WebResponse.<String>builder().errors(String.join(", ", constraintViolationException.getConstraintViolations().stream().map(ConstraintViolation::getMessage).toList())).build());
     }
 
-    @ExceptionHandler(ResponseStatusException.class)
+    @ExceptionHandler(ApiException.class)
     @ResponseBody
-    public ResponseEntity<WebResponse<String>> responseStatusException(ResponseStatusException responseStatusException) {
-        log.warn("Error", responseStatusException);
-        return ResponseEntity.status(responseStatusException.getStatusCode())
-                .body(WebResponse.<String>builder().errors(responseStatusException.getReason()).build());
+    public ResponseEntity<WebResponse<String>> apiException(ApiException apiException) {
+        log.warn("Error", apiException);
+        final var responseException = mappedToResponseStatusException(apiException);
+        return ResponseEntity.status(responseException.getStatusCode())
+                .body(WebResponse.<String>builder().errors(responseException.getReason()).build());
+    }
+
+    private static ResponseStatusException mappedToResponseStatusException(ApiException apiException) {
+        return new ResponseStatusException(switch (apiException.getStatusCode()) {
+            case 1 -> HttpStatus.NOT_FOUND;
+            case 2 -> HttpStatus.UNAUTHORIZED;
+            case 3 -> HttpStatus.BAD_REQUEST;
+            default -> HttpStatus.INTERNAL_SERVER_ERROR;
+        }, apiException.getMessage());
     }
 }

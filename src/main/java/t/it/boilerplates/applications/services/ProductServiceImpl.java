@@ -2,9 +2,8 @@ package t.it.boilerplates.applications.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
+import t.it.boilerplates.commons.exceptions.NotFoundResourceException;
 import t.it.boilerplates.domains.entities.Product;
 import t.it.boilerplates.domains.repositories.ProductRepository;
 import t.it.boilerplates.interfaces.models.requests.AddProductRequest;
@@ -35,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public AddedProductResponse updateProduct(UpdateAllProductFieldRequest updateAllProductField) {
-        final var product = productRepository.findById(updateAllProductField.id()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "product is not found"));
+        final var product = productRepository.findById(updateAllProductField.id()).orElseThrow(() -> new NotFoundResourceException("product is not found"));
 
         product.setName(updateAllProductField.name());
         product.setPrice(updateAllProductField.price());
@@ -50,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public AddedProductResponse updateProduct(UpdateSomeProductFieldsRequest updateSomeProductFields) {
-        final var product = productRepository.findById(updateSomeProductFields.id()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "product is not found"));
+        final var product = productRepository.findById(updateSomeProductFields.id()).orElseThrow(() -> new NotFoundResourceException("product is not found"));
         log.info("fields: {}", updateSomeProductFields);
 
         Optional.ofNullable(product).ifPresent(item -> {
@@ -81,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDetailResponse getProductById(String id) {
-        final var product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "product is not found"));
+        final var product = productRepository.findById(id).orElseThrow(() -> new NotFoundResourceException("product is not found"));
         return ProductDetailResponse.builder().id(product.getId()).name(product.getName()).price(product.getPrice()).createdAt(product.getCreatedAt().toEpochSecond(ZoneOffset.UTC)).updatedAt(product.getUpdatedAt().toEpochSecond(ZoneOffset.UTC)).description(product.getDescription()).category(product.getCategory()).build();
     }
 
@@ -92,7 +91,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void removeProductById(String id) {
-        final var product = productRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "product is not found"));
+        final var product = productRepository.findById(id).orElseThrow(() -> new NotFoundResourceException("product is not found"));
         productRepository.deleteProduct(product);
     }
 }
