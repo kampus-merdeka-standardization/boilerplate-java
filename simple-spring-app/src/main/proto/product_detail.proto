@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option java_package = "t.it.simplespringapp.models.responses";
+option java_multiple_files = true;
+
+message ProductDetail{
+  string id = 1;
+  string name = 2;
+  int64 price = 3;
+  string category = 4;
+  int64 updated_at = 5;
+  int64 created_at = 6;
+  string description = 7;
+}

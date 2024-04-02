@@ -1,0 +1,22 @@
+syntax = "proto3";
+import "add_product.proto";
+import "update_all_product_fields.proto";
+import "added_product.proto";
+import "product_detail.proto";
+import "web.proto";
+import "added_products.proto";
+import "product_id.proto";
+import "empty.proto";
+import "update_some_product_fields.proto";
+
+option java_package = "t.it.simplespringapp.controllers";
+option java_multiple_files = true;
+
+service ProductController{
+  rpc Add(AddProduct) returns (AddedProduct);
+  rpc GetById(ProductId) returns (ProductDetail);
+  rpc UpdateSome(UpdateSomeProductFields) returns (AddedProduct);
+  rpc UpdateAll(UpdateAllProductFields) returns (AddedProduct);
+  rpc Remove(ProductId) returns (Web);
+  rpc Get(Empty) returns (AddedProducts);
+}

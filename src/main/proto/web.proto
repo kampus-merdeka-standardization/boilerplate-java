@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-option java_package = "t.it.boilerplates.models.responses";
-option java_multiple_files = true;
-import "google/protobuf/struct.proto";
-
-message Web {
-  string message = 1;
-}
