@@ -10,7 +10,6 @@ import t.it.restclient.domains.entities.Product;
 import t.it.restclient.domains.repositories.ProductRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
