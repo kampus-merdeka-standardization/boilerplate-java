@@ -20,17 +20,19 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public Mono<PersistedProduct> addProduct(AddProduct addProduct) {
-        final var productEntity = Product.builder()
-                .name(addProduct.name())
-                .productDetail(ProductDetail.builder()
-                        .price(addProduct.price())
-                        .capacity(addProduct.capacity())
-                        .color(addProduct.color())
-                        .year(addProduct.year())
-                        .build())
-                .build();
-        return productRepository.addProduct(productEntity).map(product -> PersistedProduct.builder()
+    public Mono<PersistedProduct> addProduct(Mono<AddProduct> addProduct) {
+        return productRepository.addProduct(
+                addProduct.map(item ->
+                        Product.builder()
+                                .name(item.name())
+                                .productDetail(ProductDetail.builder()
+                                        .price(item.price())
+                                        .capacity(item.capacity())
+                                        .color(item.color())
+                                        .year(item.year())
+                                        .build())
+                                .build())
+        ).map(product -> PersistedProduct.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getProductDetail().getPrice())

@@ -6,7 +6,7 @@ import t.it.restclient.domains.entities.Product;
 import java.util.List;
 
 public interface ProductRepository {
-    Mono<Product> addProduct(Product product);
+    Mono<Product> addProduct(Mono<Product> product);
 
     Mono<List<Product>> products();
 }

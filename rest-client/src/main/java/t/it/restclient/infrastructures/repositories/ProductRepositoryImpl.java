@@ -1,6 +1,6 @@
 package t.it.restclient.infrastructures.repositories;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
@@ -10,20 +10,23 @@ import t.it.restclient.domains.entities.Product;
 import t.it.restclient.domains.repositories.ProductRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-@RequiredArgsConstructor
 public class ProductRepositoryImpl implements ProductRepository {
     private final WebClient webClient;
 
+    public ProductRepositoryImpl(@Qualifier("sslWebClient") WebClient webClient) {
+        this.webClient = webClient;
+    }
+
     @Override
-    public Mono<Product> addProduct(Product product) {
-        Mono<Product> productMono = Mono.just(product);
+    public Mono<Product> addProduct(Mono<Product> product) {
         return webClient.post()
                 .uri("/objects")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(productMono, Product.class)
+                .body(product, Product.class)
                 .retrieve()
                 .bodyToMono(Product.class);
     }

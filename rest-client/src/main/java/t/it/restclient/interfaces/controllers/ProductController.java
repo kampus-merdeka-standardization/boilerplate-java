@@ -18,7 +18,7 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping(path = "/products")
-    public Mono<PersistedProduct> addProduct(@RequestBody AddProduct addProduct) {
+    public Mono<PersistedProduct> addProduct(@RequestBody Mono<AddProduct> addProduct) {
         return productService.addProduct(addProduct);
     }
 
