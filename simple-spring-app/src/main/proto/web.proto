@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-option java_package = "t.it.simplespringapp.models.responses";
-option java_multiple_files = true;
-
-message Web {
-  string message = 1;
-}

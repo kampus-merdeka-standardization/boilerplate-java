@@ -6,8 +6,8 @@
 
     <modules>
         <module>simple-spring-app</module>
-        <module>rest-server</module>
-        <module>rest-client</module>
+        <module>simple-spring-client</module>
+        <module>simple-spring-rest-server</module>
     </modules>
 
     <groupId>t.it</groupId>

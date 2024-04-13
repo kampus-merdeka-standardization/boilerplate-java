@@ -18,6 +18,7 @@ import java.util.Optional;
 public class GraphQlErrorHandler {
     @GraphQlExceptionHandler(ConstraintViolationException.class)
     public GraphQLError constraintViolationException(ConstraintViolationException constraintViolationException) {
+        log.warn("Error", constraintViolationException);
         return GraphQLError.newError().errorType(ErrorType.BAD_REQUEST).message(String.join(", ", constraintViolationException.getConstraintViolations().stream().map(ConstraintViolation::getMessage).toList())).build();
     }
 
