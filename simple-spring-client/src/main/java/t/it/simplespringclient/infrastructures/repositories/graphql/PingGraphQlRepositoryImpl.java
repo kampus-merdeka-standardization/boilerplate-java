@@ -1,7 +1,6 @@
-package t.it.simplespringclient.infrastructures.repositories;
+package t.it.simplespringclient.infrastructures.repositories.graphql;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;

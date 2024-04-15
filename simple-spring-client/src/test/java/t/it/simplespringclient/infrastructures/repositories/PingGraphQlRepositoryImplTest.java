@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import t.it.simplespringclient.domains.repositories.PingRepository;
 import t.it.simplespringclient.applications.models.responses.PongResponse;
+import t.it.simplespringclient.infrastructures.repositories.graphql.PingGraphQlRepositoryImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package t.it.simplespringclient.infrastructures.repositories;
+package t.it.simplespringclient.infrastructures.repositories.rest;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
