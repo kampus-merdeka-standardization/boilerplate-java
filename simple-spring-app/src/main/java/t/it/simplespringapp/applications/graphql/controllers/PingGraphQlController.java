@@ -1,4 +1,4 @@
-package t.it.simplespringapp.applications.controllers.graphql.controllers;
+package t.it.simplespringapp.applications.graphql.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.QueryMapping;

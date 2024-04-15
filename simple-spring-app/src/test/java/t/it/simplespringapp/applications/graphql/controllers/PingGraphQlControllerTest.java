@@ -8,7 +8,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.test.annotation.DirtiesContext;
-import t.it.simplespringapp.applications.controllers.graphql.controllers.PingGraphQlController;
 import t.it.simplespringapp.domains.services.PingService;
 import t.it.simplespringapp.infrastructures.config.AppConfig;
 import t.it.simplespringapp.applications.models.responses.PongResponse;

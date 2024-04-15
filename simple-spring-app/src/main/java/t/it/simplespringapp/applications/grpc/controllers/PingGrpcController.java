@@ -1,4 +1,4 @@
-package t.it.simplespringapp.applications.controllers.grpc.controllers;
+package t.it.simplespringapp.applications.grpc.controllers;
 
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;

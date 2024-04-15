@@ -1,4 +1,4 @@
-package t.it.simplespringapp.applications.controllers.rest.controllers;
+package t.it.simplespringapp.applications.rest.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
