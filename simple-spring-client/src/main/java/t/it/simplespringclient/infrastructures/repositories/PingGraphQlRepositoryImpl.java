@@ -17,6 +17,6 @@ public class PingGraphQlRepositoryImpl implements PingRepository {
     public Mono<String> ping() {
         return httpGraphQlClient.documentName("pingPong")
                 .retrieve("pingPong")
-                .toEntity(new ParameterizedTypeReference<PongResponse>(){}).map(PongResponse::message);
+                .toEntity(PongResponse.class).map(PongResponse::message);
     }
 }

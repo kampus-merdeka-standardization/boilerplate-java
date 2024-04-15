@@ -45,7 +45,7 @@ class PingGraphQlRepositoryImplTest {
 
         Mono<PongResponse> pongResponse = Mono.just(PongResponse.builder().message("pong").build());
 
-        when(retrieveSpec.toEntity(any((new ParameterizedTypeReference<PongResponse>(){}).getClass())).thenReturn(pongResponse));
+        when(retrieveSpec.toEntity(PongResponse.class)).thenReturn(pongResponse);
         when(httpGraphQlClient.documentName(anyString())).thenReturn(requestSpec);
         when(requestSpec.retrieve(anyString())).thenReturn(retrieveSpec);
 
@@ -55,8 +55,8 @@ class PingGraphQlRepositoryImplTest {
                 .expectNext("pong")
                 .verifyComplete();
 
+        verify(retrieveSpec, times(1)).toEntity(PongResponse.class);
         verify(httpGraphQlClient, times(1)).documentName(anyString());
         verify(requestSpec, times(1)).retrieve(anyString());
-//        verify(retrieveSpec, times(1)).toEntity(PongResponse.class);
     }
 }
