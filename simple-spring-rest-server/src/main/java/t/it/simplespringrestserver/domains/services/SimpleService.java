@@ -1,14 +1,15 @@
 package t.it.simplespringrestserver.domains.services;
 
 
+import reactor.core.publisher.Mono;
 import t.it.simplespringrestserver.applications.models.requests.AddUser;
 import t.it.simplespringrestserver.applications.models.requests.UpdateUser;
 import t.it.simplespringrestserver.applications.models.responses.CurrentUserState;
 
 public interface SimpleService {
-    String getGreetingByName(String name);
-    CurrentUserState addUser(AddUser addUser);
-    CurrentUserState updateAllFields(UpdateUser updateUser);
-    CurrentUserState updateSomeFields(UpdateUser updateUser);
-    CurrentUserState deleteUser(String id);
+    Mono<String> getGreetingByName(String name);
+    Mono<CurrentUserState> addUser(AddUser addUser);
+    Mono<CurrentUserState>updateAllFields(UpdateUser updateUser);
+    Mono<CurrentUserState> updateSomeFields(UpdateUser updateUser);
+    Mono<CurrentUserState> deleteUser(String id);
 }

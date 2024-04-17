@@ -47,5 +47,7 @@ class PingGrpcRepositoryImplTest {
         StepVerifier.create(ping)
                 .expectNext("pong")
                 .verifyComplete();
+
+        verify(pingStub, times(1)).request(any(Ping.class), any(StreamObserver.class));
     }
 }

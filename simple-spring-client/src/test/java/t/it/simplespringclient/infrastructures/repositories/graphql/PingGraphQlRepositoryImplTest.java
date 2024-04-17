@@ -1,4 +1,4 @@
-package t.it.simplespringclient.infrastructures.repositories;
+package t.it.simplespringclient.infrastructures.repositories.graphql;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,6 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import t.it.simplespringclient.domains.repositories.PingRepository;
 import t.it.simplespringclient.applications.models.responses.PongResponse;
-import t.it.simplespringclient.infrastructures.repositories.graphql.PingGraphQlRepositoryImpl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
