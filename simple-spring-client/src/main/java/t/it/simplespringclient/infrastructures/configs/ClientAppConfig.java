@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -39,9 +40,10 @@ public class ClientAppConfig {
     @GrpcClient("ping")
     private PingServiceStubGrpc.PingServiceStubStub pingStub;
 
-
-    @Bean
-    WebClient sslWebClient(SslContext sslContext) {
+    @Profile({"production"})
+    @Bean("productWebClient")
+    WebClient sslProductWebClient(SslContext sslContext) {
+        log.info("production web client");
         SslProvider sslProvider = SslProvider.builder().sslContext(sslContext).build();
         HttpClient httpClient = HttpClient.create().secure(sslProvider);
 
@@ -50,8 +52,10 @@ public class ClientAppConfig {
                 .clientConnector(new ReactorClientHttpConnector(httpClient)).build();
     }
 
-    @Bean
-    WebClient nonSslWebClient() {
+    @Profile({"local"})
+    @Bean("productWebClient")
+    WebClient nonSslProductWebClient() {
+        log.info("local web client");
         return WebClient.builder().baseUrl(Constants.PRODUCT_BASE_URL)
                 .defaultHeader("X-API-TOKEN", UUID.randomUUID().toString())
                 .build();

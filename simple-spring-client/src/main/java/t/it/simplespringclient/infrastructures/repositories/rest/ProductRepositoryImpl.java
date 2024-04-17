@@ -15,7 +15,7 @@ import java.util.List;
 public class ProductRepositoryImpl implements ProductRepository {
     private final WebClient webClient;
 
-    public ProductRepositoryImpl(@Qualifier("sslWebClient") WebClient webClient) {
+    public ProductRepositoryImpl(@Qualifier("productWebClient") WebClient webClient) {
         this.webClient = webClient;
     }
 
