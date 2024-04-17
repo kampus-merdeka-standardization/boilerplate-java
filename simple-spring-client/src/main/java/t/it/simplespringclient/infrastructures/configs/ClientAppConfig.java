@@ -40,14 +40,14 @@ public class ClientAppConfig {
         SslProvider sslProvider = SslProvider.builder().sslContext(sslContext).build();
         HttpClient httpClient = HttpClient.create().secure(sslProvider);
 
-        return WebClient.builder().baseUrl(Constants.BASE_URL)
+        return WebClient.builder().baseUrl(Constants.PRODUCT_BASE_URL)
                 .defaultHeader("X-API-TOKEN", UUID.randomUUID().toString())
                 .clientConnector(new ReactorClientHttpConnector(httpClient)).build();
     }
 
     @Bean
     WebClient nonSslWebClient() {
-        return WebClient.builder().baseUrl(Constants.BASE_URL)
+        return WebClient.builder().baseUrl(Constants.PRODUCT_BASE_URL)
                 .defaultHeader("X-API-TOKEN", UUID.randomUUID().toString())
                 .build();
     }
@@ -64,7 +64,19 @@ public class ClientAppConfig {
     }
 
     @Bean
-    HttpGraphQlClient httpGraphQlClient(@Qualifier("nonSslWebClient") WebClient webClient) {
+    public WebClient pingGraphQlWebClient() {
+        return WebClient.builder().baseUrl(Constants.PING_BASE_URL + "/graphql")
+                .build();
+    }
+
+    @Bean
+    public WebClient pingRestWebClient() {
+        return WebClient.builder().baseUrl(Constants.PING_BASE_URL)
+                .build();
+    }
+
+    @Bean
+    HttpGraphQlClient httpGraphQlClient(@Qualifier("pingGraphQlWebClient") WebClient webClient) {
         return HttpGraphQlClient.create(webClient);
     }
 }
