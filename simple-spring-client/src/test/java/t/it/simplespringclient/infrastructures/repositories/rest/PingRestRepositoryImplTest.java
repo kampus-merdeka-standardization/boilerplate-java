@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import t.it.simplespringclient.applications.models.responses.PongResponse;
@@ -48,7 +49,7 @@ class PingRestRepositoryImplTest {
         when(requestHeadersUriSpec.accept(any(MediaType.class))).thenReturn(requestHeadersUriSpec);
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
 
-        Mono<String> ping = pingRepository.ping();
+        Flux<String> ping = pingRepository.ping();
 
         StepVerifier.create(ping)
                 .expectNext("pong")

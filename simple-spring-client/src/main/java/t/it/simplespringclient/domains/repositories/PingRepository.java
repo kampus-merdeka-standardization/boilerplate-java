@@ -1,7 +1,7 @@
 package t.it.simplespringclient.domains.repositories;
 
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 public interface PingRepository {
-    Mono<String> ping();
+    Flux<String> ping();
 }

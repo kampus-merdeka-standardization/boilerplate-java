@@ -4,14 +4,14 @@ import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
 import t.it.simplespringapp.domains.services.PingService;
-import t.it.simplespringapp.controllers.PingControllerGrpc;
 import t.it.simplespringapp.models.requests.Ping;
 import t.it.simplespringapp.models.responses.Pong;
+import t.it.simplespringapp.stubs.PingServiceStubGrpc;
 
 
 @RequiredArgsConstructor
 @GrpcService
-public class PingGrpcController extends PingControllerGrpc.PingControllerImplBase {
+public class PingGrpcController extends PingServiceStubGrpc.PingServiceStubImplBase {
     private final PingService pingService;
 
     @Override

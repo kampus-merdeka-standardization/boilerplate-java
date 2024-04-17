@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.graphql.client.GraphQlClient;
 import org.springframework.graphql.client.HttpGraphQlClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import t.it.simplespringclient.domains.repositories.PingRepository;
@@ -48,7 +49,7 @@ class PingGraphQlRepositoryImplTest {
         when(httpGraphQlClient.documentName(anyString())).thenReturn(requestSpec);
         when(requestSpec.retrieve(anyString())).thenReturn(retrieveSpec);
 
-        Mono<String> ping = pingRepository.ping();
+        Flux<String> ping = pingRepository.ping();
 
         StepVerifier.create(ping)
                 .expectNext("pong")

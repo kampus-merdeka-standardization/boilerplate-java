@@ -4,6 +4,7 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;
+import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.SslProvider;
 import t.it.simplespringclient.infrastructures.commons.Constants;
+import t.it.simplespringclient.stubs.PingServiceStubGrpc;
 
 import javax.net.ssl.KeyManagerFactory;
 import java.io.IOException;
@@ -34,6 +36,9 @@ public class ClientAppConfig {
     private String keyStorePath;
     @Value("${RESTFUL_API_KEYSTORE_PASSWORD}")
     private String keyStorePassword;
+    @GrpcClient("ping")
+    private PingServiceStubGrpc.PingServiceStubStub pingStub;
+
 
     @Bean
     WebClient sslWebClient(SslContext sslContext) {
@@ -78,5 +83,10 @@ public class ClientAppConfig {
     @Bean
     HttpGraphQlClient httpGraphQlClient(@Qualifier("pingGraphQlWebClient") WebClient webClient) {
         return HttpGraphQlClient.create(webClient);
+    }
+
+    @Bean
+    PingServiceStubGrpc.PingServiceStubStub pingServiceStub() {
+        return pingStub;
     }
 }
