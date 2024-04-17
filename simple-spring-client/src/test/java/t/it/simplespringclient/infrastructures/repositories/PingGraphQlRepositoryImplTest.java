@@ -42,7 +42,6 @@ class PingGraphQlRepositoryImplTest {
 
     @Test
     void testPing() {
-
         Mono<PongResponse> pongResponse = Mono.just(PongResponse.builder().message("pong").build());
 
         when(retrieveSpec.toEntity(PongResponse.class)).thenReturn(pongResponse);
