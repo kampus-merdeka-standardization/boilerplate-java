@@ -5,5 +5,5 @@ import lombok.With;
 
 @With
 @Builder
-public record AddUser(String name, String age) {
+public record AddUser(String name, Integer age) {
 }

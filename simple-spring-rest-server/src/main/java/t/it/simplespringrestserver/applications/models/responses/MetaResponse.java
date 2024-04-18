@@ -5,5 +5,8 @@ import lombok.With;
 
 @Builder
 @With
-public record WebResponse<T>(MetaResponse meta, T data) {
+public record MetaResponse(
+        String code,
+        String message
+) {
 }
