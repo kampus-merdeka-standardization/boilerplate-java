@@ -32,9 +32,7 @@ class SimpleControllerTest {
 
         webClient.get().uri("/hello/" + dummyName).accept(MediaType.APPLICATION_JSON).exchange()
                 .expectStatus().isOk()
-                .expectBody(WebResponse.class).value(webResponse -> {
-                    Assertions.assertEquals("Hi " + dummyName + "!", webResponse.data());
-                });
+                .expectBody(WebResponse.class).value(webResponse -> Assertions.assertEquals("Hi " + dummyName + "!", webResponse.data()));
 
         verify(simpleService, times(1)).getGreetingByName(dummyName);
     }

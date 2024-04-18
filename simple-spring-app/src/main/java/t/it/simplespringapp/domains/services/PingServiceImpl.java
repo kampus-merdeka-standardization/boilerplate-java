@@ -2,16 +2,14 @@ package t.it.simplespringapp.domains.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import t.it.simplespringapp.domains.repositories.PingRepository;
-import t.it.simplespringapp.applications.models.responses.PongResponse;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
 public class PingServiceImpl implements PingService {
-    private final PingRepository pingRepository;
 
     @Override
-    public String ping() {
-        return pingRepository.getPong();
+    public Mono<String> ping() {
+        return Mono.just("pong");
     }
 }

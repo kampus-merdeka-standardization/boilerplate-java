@@ -1,5 +1,7 @@
 package t.it.simplespringapp.domains.services;
 
+import reactor.core.publisher.Mono;
+
 public interface PingService {
-    String ping();
+    Mono<String> ping();
 }

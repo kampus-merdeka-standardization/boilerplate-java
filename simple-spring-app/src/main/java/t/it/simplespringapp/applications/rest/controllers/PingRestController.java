@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 import t.it.simplespringapp.domains.services.PingService;
 import t.it.simplespringapp.applications.models.responses.PongResponse;
 
@@ -16,9 +17,9 @@ public class PingRestController {
 
     @GetMapping(path = "/ping", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public PongResponse ping() {
-        return PongResponse.builder()
-                .message(pingService.ping())
-                .build();
+    public Mono<PongResponse> ping() {
+        return pingService.ping().map(response -> PongResponse.builder()
+                .message(response)
+                .build());
     }
 }

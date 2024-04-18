@@ -8,6 +8,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.test.annotation.DirtiesContext;
+import reactor.core.publisher.Mono;
 import t.it.simplespringapp.domains.services.PingService;
 import t.it.simplespringapp.infrastructures.config.AppConfig;
 import t.it.simplespringapp.applications.models.responses.PongResponse;
@@ -27,7 +28,7 @@ class PingGraphQlControllerTest {
     @DirtiesContext
     @Test
     void ping_ShouldSuccess() {
-        Mockito.when(pingService.ping()).thenReturn("pong");
+        Mockito.when(pingService.ping()).thenReturn(Mono.just("pong"));
 
         graphQlTester.documentName("pingPong")
                 .execute()

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import reactor.core.publisher.Mono;
 import t.it.simplespringapp.domains.services.PingService;
 import t.it.simplespringapp.models.requests.Ping;
 import t.it.simplespringapp.models.responses.Pong;
@@ -27,7 +28,7 @@ class PingGrpcControllerTest {
     @DirtiesContext
     @Test
     void testPing() {
-        Mockito.when(pingService.ping()).thenReturn("pong");
+        Mockito.when(pingService.ping()).thenReturn(Mono.just("pong"));
 
         Ping ping = Ping.newBuilder().setMessage("ping").build();
         StreamObserver<Pong> responseObserver = new StreamObserver<>() {
