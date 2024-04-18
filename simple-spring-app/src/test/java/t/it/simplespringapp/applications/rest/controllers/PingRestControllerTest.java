@@ -27,16 +27,13 @@ class PingRestControllerTest {
 
     @DirtiesContext
     @Test
-    void ping_ShouldSuccess() throws Exception {
+    void ping_ShouldSuccess() {
         Mockito.when(pingService.ping()).thenReturn(Mono.just("pong"));
 
-
-        webClient.get().uri("/ping").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(PongResponse.class).consumeWith(pongResponseEntityExchangeResult ->
-                {
-                    PongResponse responseBody = pongResponseEntityExchangeResult.getResponseBody();
-                    Assertions.assertNotNull(responseBody);
-                    Assertions.assertEquals("pong", responseBody.message());
-                }
-        );
+        webClient.get().uri("/ping").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(PongResponse.class).consumeWith(pongResponseEntityExchangeResult -> {
+            PongResponse responseBody = pongResponseEntityExchangeResult.getResponseBody();
+            Assertions.assertNotNull(responseBody);
+            Assertions.assertEquals("pong", responseBody.message());
+        });
     }
 }
