@@ -11,7 +11,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import reactor.core.publisher.Mono;
 import t.it.simplespringapp.domains.services.PingService;
 import t.it.simplespringapp.infrastructures.config.AppConfig;
-import t.it.simplespringapp.applications.models.responses.PongResponse;
 
 
 @DirtiesContext
@@ -32,9 +31,9 @@ class PingGraphQlControllerTest {
 
         graphQlTester.documentName("pingPong")
                 .execute()
-                .path("response")
-                .entity(PongResponse.class)
-                .matches(pongResponse -> pongResponse.equals(PongResponse.builder().message("pong").build()));
+                .path("message")
+                .entity(String.class)
+                .matches(pongResponse -> pongResponse.equals("pong"));
 
         Mockito.verify(pingService, Mockito.times(1)).ping();
     }
