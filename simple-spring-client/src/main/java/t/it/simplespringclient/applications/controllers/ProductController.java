@@ -21,10 +21,8 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<WebResponse<PersistedProductResponse>> addProduct(@RequestBody Mono<AddProduct> addProduct) {
         return productService.addProduct(addProduct).map(persistedProductResponse ->
-        {
-            return WebResponse.<PersistedProductResponse>builder()
-                    .meta(MetaResponse.builder().code(String.valueOf(HttpStatus.CREATED.value())).message(HttpStatus.CREATED.getReasonPhrase()).build()).data(persistedProductResponse).build();
-        });
+                WebResponse.<PersistedProductResponse>builder()
+                        .meta(MetaResponse.builder().code(String.valueOf(HttpStatus.CREATED.value())).message(HttpStatus.CREATED.getReasonPhrase()).build()).data(persistedProductResponse).build());
     }
 
     @GetMapping(path = "/products")
