@@ -19,10 +19,12 @@ public class PingRestController {
     @GetMapping(path = "/ping", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public Mono<WebResponse<String>> ping() {
-        return pingService.ping().map(response -> WebResponse.<String>builder()
-                .data(response).meta(MetaResponse.builder()
-                        .code(String.valueOf(HttpStatus.OK.value())).message(
-                                HttpStatus.OK.getReasonPhrase()
-                        ).build()).build());
+        return pingService.ping().map(response -> {
+            return WebResponse.<String>builder()
+                    .data(response).meta(MetaResponse.builder()
+                            .code(String.valueOf(HttpStatus.OK.value())).message(
+                                    HttpStatus.OK.getReasonPhrase()
+                            ).build()).build();
+        });
     }
 }
