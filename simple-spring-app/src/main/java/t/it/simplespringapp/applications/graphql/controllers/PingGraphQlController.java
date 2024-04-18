@@ -5,7 +5,6 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Mono;
 import t.it.simplespringapp.domains.services.PingService;
-import t.it.simplespringapp.applications.models.responses.PongResponse;
 
 @RequiredArgsConstructor
 @Controller

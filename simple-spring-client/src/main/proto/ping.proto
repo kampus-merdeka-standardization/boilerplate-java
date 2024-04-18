@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-option java_package = "t.it.simplespringclient.models.requests";
-option java_multiple_files = true;
-
-message Ping {
-  string message = 1;
-}

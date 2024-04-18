@@ -11,12 +11,12 @@ import reactor.core.Disposable;
 import t.it.simplespringapp.domains.services.PingService;
 import t.it.simplespringapp.models.responses.MetaResponse;
 import t.it.simplespringapp.models.responses.WebResponse;
-import t.it.simplespringapp.services.PingServiceStubGrpc;
+import t.it.simplespringapp.services.PingServiceGrpc;
 
 @RequiredArgsConstructor
 @GrpcService
 @Slf4j
-public class PingGrpcController extends PingServiceStubGrpc.PingServiceStubImplBase {
+public class PingGrpcController extends PingServiceGrpc.PingServiceImplBase {
     private final PingService pingService;
     private Disposable subscriber = null;
 

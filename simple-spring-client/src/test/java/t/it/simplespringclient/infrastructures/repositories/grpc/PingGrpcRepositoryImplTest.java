@@ -1,5 +1,7 @@
 package t.it.simplespringclient.infrastructures.repositories.grpc;
 
+import com.google.protobuf.Empty;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,18 +11,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 import t.it.simplespringclient.domains.repositories.PingRepository;
-import t.it.simplespringclient.models.requests.Ping;
-import t.it.simplespringclient.models.responses.Pong;
-import t.it.simplespringclient.stubs.PingServiceStubGrpc;
+import t.it.simplespringclient.models.responses.MetaResponse;
+import t.it.simplespringclient.models.responses.WebResponse;
+import t.it.simplespringclient.services.PingServiceGrpc;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import static org.mockito.Mockito.*;
 
 @ExtendWith(value = {MockitoExtension.class})
 class PingGrpcRepositoryImplTest {
     @Mock
-    private PingServiceStubGrpc.PingServiceStubStub pingStub;
+    private PingServiceGrpc.PingServiceStub pingStub;
     private PingRepository pingRepository;
 
     @BeforeEach
@@ -37,17 +38,17 @@ class PingGrpcRepositoryImplTest {
     @Test
     void testPing() {
         doAnswer(invocation -> {
-            StreamObserver<Pong> pongStreamObserver = ((StreamObserver<Pong>) invocation.getArguments()[1]);
-            pongStreamObserver.onNext(Pong.newBuilder().setMessage("pong").build());
+            StreamObserver<WebResponse> pongStreamObserver = ((StreamObserver<WebResponse>) invocation.getArguments()[1]);
+            pongStreamObserver.onNext(WebResponse.newBuilder().setMeta(MetaResponse.newBuilder().setCode(String.valueOf(Status.OK.getCode().value())).setMessage(Status.OK.getCode().toString()).build()).setData("pong").build());
             pongStreamObserver.onCompleted();
             return invocation;
-        }).when(pingStub).request(any(Ping.class), any(StreamObserver.class));
+        }).when(pingStub).ping(any(Empty.class), any(StreamObserver.class));
 
         Flux<String> ping = pingRepository.ping();
         StepVerifier.create(ping)
                 .expectNext("pong")
                 .verifyComplete();
 
-        verify(pingStub, times(1)).request(any(Ping.class), any(StreamObserver.class));
+        verify(pingStub, times(1)).ping(any(Empty.class), any(StreamObserver.class));
     }
 }

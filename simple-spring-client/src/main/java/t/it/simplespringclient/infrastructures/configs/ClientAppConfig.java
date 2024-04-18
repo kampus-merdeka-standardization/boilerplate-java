@@ -15,8 +15,8 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.SslProvider;
-import t.it.simplespringclient.infrastructures.commons.Constants;
-import t.it.simplespringclient.stubs.PingServiceStubGrpc;
+import t.it.simplespringclient.commons.Constants;
+import t.it.simplespringclient.services.PingServiceGrpc;
 
 import javax.net.ssl.KeyManagerFactory;
 import java.io.IOException;
@@ -38,7 +38,7 @@ public class ClientAppConfig {
     @Value("${RESTFUL_API_KEYSTORE_PASSWORD}")
     private String keyStorePassword;
     @GrpcClient("ping")
-    private PingServiceStubGrpc.PingServiceStubStub pingStub;
+    private PingServiceGrpc.PingServiceStub pingServiceStub;
 
     @Profile({"production"})
     @Bean("productWebClient")
@@ -90,7 +90,7 @@ public class ClientAppConfig {
     }
 
     @Bean
-    PingServiceStubGrpc.PingServiceStubStub pingServiceStub() {
-        return pingStub;
+    PingServiceGrpc.PingServiceStub pingServiceStub() {
+        return pingServiceStub;
     }
 }

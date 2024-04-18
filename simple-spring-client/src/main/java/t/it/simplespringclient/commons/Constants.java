@@ -1,4 +1,4 @@
-package t.it.simplespringclient.infrastructures.commons;
+package t.it.simplespringclient.commons;
 
 public enum Constants {
     ;

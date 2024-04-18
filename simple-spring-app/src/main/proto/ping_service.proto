@@ -6,6 +6,6 @@ import "google/protobuf/empty.proto";
 option java_package = "t.it.simplespringapp.services";
 option java_multiple_files = true;
 
-service PingServiceStub{
+service PingService{
   rpc Ping(google.protobuf.Empty) returns (WebResponse);
 }

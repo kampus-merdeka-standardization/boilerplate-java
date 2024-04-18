@@ -1,6 +1,7 @@
 package t.it.simplespringclient.infrastructures.repositories.grpc;
 
 
+import com.google.protobuf.Empty;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,25 +10,23 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
 import reactor.util.concurrent.Queues;
 import t.it.simplespringclient.domains.repositories.PingRepository;
-import t.it.simplespringclient.models.requests.Ping;
-import t.it.simplespringclient.models.responses.Pong;
-import t.it.simplespringclient.stubs.PingServiceStubGrpc;
+import t.it.simplespringclient.models.responses.WebResponse;
+import t.it.simplespringclient.services.PingServiceGrpc;
 
 @Repository
 @Slf4j
 @RequiredArgsConstructor
 public class PingGrpcRepositoryImpl implements PingRepository {
-    private final PingServiceStubGrpc.PingServiceStubStub stub;
+    private final PingServiceGrpc.PingServiceStub stub;
 
     @Override
     public Flux<String> ping() {
-        Ping ping = Ping.newBuilder().setMessage("ping").build();
         Sinks.Many<String> pong = Sinks.many().multicast().onBackpressureBuffer(Queues.SMALL_BUFFER_SIZE, false);
-        StreamObserver<Pong> pongResponse = new StreamObserver<>() {
+        StreamObserver<WebResponse> pongResponse = new StreamObserver<>() {
 
             @Override
-            public void onNext(Pong value) {
-                pong.tryEmitNext(value.getMessage());
+            public void onNext(WebResponse value) {
+                pong.tryEmitNext(value.getData());
             }
 
             @Override
@@ -42,7 +41,7 @@ public class PingGrpcRepositoryImpl implements PingRepository {
                 pong.tryEmitComplete();
             }
         };
-        stub.request(ping, pongResponse);
+        stub.ping(Empty.newBuilder().build(), pongResponse);
         return pong.asFlux();
     }
 }

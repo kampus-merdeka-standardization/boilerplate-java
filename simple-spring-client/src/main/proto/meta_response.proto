@@ -3,6 +3,7 @@ syntax = "proto3";
 option java_package = "t.it.simplespringclient.models.responses";
 option java_multiple_files = true;
 
-message Pong {
-  string message = 1;
+message MetaResponse{
+  string code = 1;
+  string message = 2;
 }

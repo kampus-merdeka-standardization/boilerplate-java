@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -18,13 +19,11 @@ import t.it.simplespringrestserver.applications.models.responses.WebResponse;
 import t.it.simplespringrestserver.domains.services.SimpleService;
 
 import java.time.Instant;
-import java.util.HashMap;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SuppressWarnings("unchecked")
 @WebFluxTest
 @ExtendWith(SpringExtension.class)
 class SimpleControllerTest {
@@ -61,10 +60,11 @@ class SimpleControllerTest {
 
         when(simpleService.addUser(any(AddUser.class))).thenReturn(Mono.just(currentUserState));
 
-        webClient.post().uri("/hello").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(addUser)).exchange().expectStatus().isCreated().expectBody(WebResponse.class).value(webResponse -> {
-            HashMap<String, Object> actualData = (HashMap<String, Object>) webResponse.data();
-            assertEquals(currentUserState.id(), actualData.get("id"));
-            assertEquals(currentUserState.message(), actualData.get("message"));
+        webClient.post().uri("/hello").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(addUser)).exchange().expectStatus().isCreated().expectBody(new ParameterizedTypeReference<WebResponse<CurrentUserState>>() {
+        }).value(webResponse -> {
+            CurrentUserState actualData = webResponse.data();
+            assertEquals(currentUserState.id(), actualData.id());
+            assertEquals(currentUserState.message(), actualData.message());
             assertEquals(String.valueOf(HttpStatus.CREATED.value()), webResponse.meta().code());
         });
 
@@ -83,10 +83,11 @@ class SimpleControllerTest {
 
         when(simpleService.updateAllFields(any(UpdateUser.class))).thenReturn(Mono.just(currentUserState));
 
-        webClient.put().uri("/hello").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(updateUser)).exchange().expectStatus().isOk().expectBody(WebResponse.class).value(webResponse -> {
-            HashMap<String, Object> actualData = (HashMap<String, Object>) webResponse.data();
-            assertEquals(currentUserState.id(), actualData.get("id"));
-            assertEquals(currentUserState.message(), actualData.get("message"));
+        webClient.put().uri("/hello").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(updateUser)).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<CurrentUserState>>() {
+        }).value(webResponse -> {
+            CurrentUserState actualData = webResponse.data();
+            assertEquals(currentUserState.id(), actualData.id());
+            assertEquals(currentUserState.message(), actualData.message());
             assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
         });
 
@@ -105,10 +106,11 @@ class SimpleControllerTest {
 
         when(simpleService.updateSomeFields(any(UpdateUser.class))).thenReturn(Mono.just(currentUserState));
 
-        webClient.patch().uri("/hello/" + currentUserState.id()).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(updateUser)).exchange().expectStatus().isOk().expectBody(WebResponse.class).value(webResponse -> {
-            HashMap<String, Object> actualData = (HashMap<String, Object>) webResponse.data();
-            assertEquals(currentUserState.id(), actualData.get("id"));
-            assertEquals(currentUserState.message(), actualData.get("message"));
+        webClient.patch().uri("/hello/" + currentUserState.id()).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(updateUser)).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<CurrentUserState>>() {
+        }).value(webResponse -> {
+            CurrentUserState actualData = webResponse.data();
+            assertEquals(currentUserState.id(), actualData.id());
+            assertEquals(currentUserState.message(), actualData.message());
             assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
         });
 
@@ -125,10 +127,11 @@ class SimpleControllerTest {
 
         when(simpleService.deleteUser(anyString())).thenReturn(Mono.just(currentUserState));
 
-        webClient.delete().uri("/hello/" + currentUserState.id()).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(WebResponse.class).value(webResponse -> {
-            HashMap<String, Object> actualData = (HashMap<String, Object>) webResponse.data();
-            assertEquals(currentUserState.id(), actualData.get("id"));
-            assertEquals(currentUserState.message(), actualData.get("message"));
+        webClient.delete().uri("/hello/" + currentUserState.id()).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<CurrentUserState>>() {
+        }).value(webResponse -> {
+            CurrentUserState actualData = webResponse.data();
+            assertEquals(currentUserState.id(), actualData.id());
+            assertEquals(currentUserState.message(), actualData.message());
             assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
         });
 
