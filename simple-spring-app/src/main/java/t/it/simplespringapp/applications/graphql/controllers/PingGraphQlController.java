@@ -12,8 +12,8 @@ import t.it.simplespringapp.applications.models.responses.PongResponse;
 public class PingGraphQlController {
     private final PingService pingService;
 
-    @QueryMapping(name = "response")
-    public Mono<PongResponse> ping() {
-        return pingService.ping().map(response -> PongResponse.builder().message(response).build());
+    @QueryMapping(name = "message")
+    public Mono<String> ping() {
+        return pingService.ping();
     }
 }

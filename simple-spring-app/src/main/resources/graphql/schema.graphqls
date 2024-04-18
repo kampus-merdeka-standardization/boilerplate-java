@@ -1,9 +1,5 @@
 scalar Long
 
 type Query {
-    response: PongResponse!
-}
-
-type PongResponse {
     message: String!
 }

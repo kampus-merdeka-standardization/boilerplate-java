@@ -36,4 +36,6 @@ class SimpleControllerTest {
 
         verify(simpleService, times(1)).getGreetingByName(dummyName);
     }
+
+
 }

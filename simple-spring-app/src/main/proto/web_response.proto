@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "meta_response.proto";
+
+option java_package = "t.it.simplespringapp.models.responses";
+option java_multiple_files = true;
+
+message WebResponse {
+  MetaResponse meta = 10;
+  string data = 11;
+}

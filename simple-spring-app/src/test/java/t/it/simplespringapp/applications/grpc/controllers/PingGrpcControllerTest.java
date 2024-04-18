@@ -1,5 +1,7 @@
 package t.it.simplespringapp.applications.grpc.controllers;
 
+import com.google.protobuf.Empty;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -10,8 +12,8 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import reactor.core.publisher.Mono;
 import t.it.simplespringapp.domains.services.PingService;
-import t.it.simplespringapp.models.requests.Ping;
-import t.it.simplespringapp.models.responses.Pong;
+import t.it.simplespringapp.models.responses.MetaResponse;
+import t.it.simplespringapp.models.responses.WebResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,15 +32,15 @@ class PingGrpcControllerTest {
     void testPing() {
         Mockito.when(pingService.ping()).thenReturn(Mono.just("pong"));
 
-        Ping ping = Ping.newBuilder().setMessage("ping").build();
-        StreamObserver<Pong> responseObserver = new StreamObserver<>() {
+        MetaResponse metaResponse = MetaResponse.newBuilder().setCode(String.valueOf(Status.OK.getCode().value())).setMessage(Status.OK.getCode().toString()).build();
+        WebResponse expectedWebResponse = WebResponse.newBuilder().setMeta(metaResponse).setData("pong").build();
+
+        StreamObserver<WebResponse> responseObserver = new StreamObserver<>() {
             @Override
-            public void onNext(Pong value) {
-                log.info("got response: {}", value.getMessage());
+            public void onNext(WebResponse value) {
+                log.info("got response: {}", value.getData());
                 assertNotNull(value);
-                assertEquals(Pong.newBuilder()
-                        .setMessage("pong")
-                        .build(), value);
+                assertEquals(expectedWebResponse, value);
             }
 
             @Override
@@ -50,17 +52,16 @@ class PingGrpcControllerTest {
 
             }
         };
-        pingGrpcController.request(ping, responseObserver);
+        pingGrpcController.ping(Empty.newBuilder().build(), responseObserver);
     }
 
     @Test
     void testPing_ShouldThrowException() {
         Mockito.when(pingService.ping()).thenThrow(new RuntimeException("Fail to get response"));
 
-        Ping ping = Ping.newBuilder().setMessage("ping").build();
-        StreamObserver<Pong> responseObserver = new StreamObserver<>() {
+        StreamObserver<WebResponse> responseObserver = new StreamObserver<>() {
             @Override
-            public void onNext(Pong value) {
+            public void onNext(WebResponse value) {
 
             }
 
@@ -73,6 +74,6 @@ class PingGrpcControllerTest {
 
             }
         };
-        assertThrows(RuntimeException.class, () -> pingGrpcController.request(ping, responseObserver));
+        assertThrows(RuntimeException.class, () -> pingGrpcController.ping(Empty.newBuilder().build(), responseObserver));
     }
 }
