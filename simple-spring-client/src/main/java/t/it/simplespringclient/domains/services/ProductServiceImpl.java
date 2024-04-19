@@ -5,12 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import t.it.simplespringclient.domains.services.models.UpdateProduct;
-import t.it.simplespringclient.applications.models.responses.PersistedProductDetailResponse;
+import t.it.simplespringclient.domains.services.models.PersistedProductDetail;
 import t.it.simplespringclient.domains.repositories.entities.Product;
 import t.it.simplespringclient.domains.repositories.entities.ProductDetail;
 import t.it.simplespringclient.domains.repositories.ProductRepository;
 import t.it.simplespringclient.domains.services.models.AddProduct;
-import t.it.simplespringclient.applications.models.responses.PersistedProductResponse;
+import t.it.simplespringclient.domains.services.models.PersistedProduct;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public Mono<PersistedProductResponse> addProduct(Mono<AddProduct> addProduct) {
+    public Mono<PersistedProduct> addProduct(Mono<AddProduct> addProduct) {
 
         return productRepository.addProduct(
                 addProduct.map(item -> {
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
                     product.setProductDetail(productDetail);
                     return product;
                 })
-        ).map(product -> PersistedProductResponse.builder()
+        ).map(product -> PersistedProduct.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .price(product.getProductDetail().getPrice())
@@ -45,8 +45,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Mono<List<PersistedProductResponse>> getProducts() {
-        return productRepository.products().map(products -> products.stream().map(product -> PersistedProductResponse.builder()
+    public Mono<List<PersistedProduct>> getProducts() {
+        return productRepository.products().map(products -> products.stream().map(product -> PersistedProduct.builder()
                         .id(product.getId())
                         .name(product.getName())
                         .price(Optional.ofNullable(product.getProductDetail())
@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Mono<PersistedProductResponse> updateSomeProductFields(Mono<UpdateProduct> updateProduct) {
+    public Mono<PersistedProduct> updateSomeProductFields(Mono<UpdateProduct> updateProduct) {
         return productRepository.updateSomeProductFields(updateProduct.map(item -> {
             var product = new Product();
             product.setId(item.id());
@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
                 product.setProductDetail(productDetail);
             }
             return product;
-        })).map(product -> PersistedProductResponse.builder()
+        })).map(product -> PersistedProduct.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .createdAt(product.getCreatedAt())
@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Mono<PersistedProductResponse> updateAllProductFields(Mono<UpdateProduct> updateProduct) {
+    public Mono<PersistedProduct> updateAllProductFields(Mono<UpdateProduct> updateProduct) {
         return productRepository.updateAllProductFields(updateProduct.map(item -> {
             var product = new Product();
             product.setId(item.id());
@@ -93,7 +93,7 @@ public class ProductServiceImpl implements ProductService {
             productDetail.setCapacity(item.capacity());
             product.setProductDetail(productDetail);
             return product;
-        })).map(product -> PersistedProductResponse.builder()
+        })).map(product -> PersistedProduct.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .createdAt(product.getCreatedAt())
@@ -107,8 +107,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Mono<PersistedProductDetailResponse> getProductById(String id) {
-        return productRepository.findProductById(id).map(product -> PersistedProductDetailResponse.builder()
+    public Mono<PersistedProductDetail> getProductById(String id) {
+        return productRepository.findProductById(id).map(product -> PersistedProductDetail.builder()
                 .id(product.getId())
                 .color(product.getProductDetail().getColor())
                 .capacity(product.getProductDetail().getCapacity())

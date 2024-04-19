@@ -1,11 +1,11 @@
-package t.it.simplespringclient.applications.models.responses;
+package t.it.simplespringclient.domains.services.models;
 
 import lombok.Builder;
 import lombok.With;
 
 @Builder
 @With
-public record PersistedProductResponse(
+public record PersistedProduct(
         String id,
         String name,
         Double price,
