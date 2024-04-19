@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProductRepository {
     Mono<Product> addProduct(Mono<Product> product);
 
-    Mono<List<Product>> products();
+    Mono<List<Product>> findProducts();
 
     Mono<Product> updateAllProductFields(Mono<Product> product);
 

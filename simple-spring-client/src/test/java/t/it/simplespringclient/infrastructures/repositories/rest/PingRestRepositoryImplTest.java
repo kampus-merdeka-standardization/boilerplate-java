@@ -43,7 +43,7 @@ class PingRestRepositoryImplTest {
     }
 
     @Test
-    void testPing() {
+    void testPing_Success() {
         WebResponse<String> webResponse = WebResponse.<String>builder().data("pong").meta(MetaResponse.builder().code(String.valueOf(HttpStatus.OK.value())).message(HttpStatus.OK.getReasonPhrase()).build()).build();
 
         when(responseSpec.bodyToMono(new ParameterizedTypeReference<WebResponse<String>>() {

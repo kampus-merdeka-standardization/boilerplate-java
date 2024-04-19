@@ -46,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Mono<List<PersistedProduct>> getProducts() {
-        return productRepository.products().map(products -> products.stream().map(product -> PersistedProduct.builder()
+        return productRepository.findProducts().map(products -> products.stream().map(product -> PersistedProduct.builder()
                         .id(product.getId())
                         .name(product.getName())
                         .price(Optional.ofNullable(product.getProductDetail())

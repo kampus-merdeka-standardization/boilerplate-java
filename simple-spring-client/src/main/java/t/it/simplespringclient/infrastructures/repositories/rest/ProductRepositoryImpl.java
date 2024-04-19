@@ -34,7 +34,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
-    public Mono<List<Product>> products() {
+    public Mono<List<Product>> findProducts() {
         return webClient.get()
                 .uri("/objects")
                 .accept(MediaType.APPLICATION_JSON)
