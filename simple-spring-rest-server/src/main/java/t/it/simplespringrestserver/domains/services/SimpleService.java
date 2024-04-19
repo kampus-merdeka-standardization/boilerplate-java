@@ -2,9 +2,9 @@ package t.it.simplespringrestserver.domains.services;
 
 
 import reactor.core.publisher.Mono;
-import t.it.simplespringrestserver.applications.models.requests.AddUser;
-import t.it.simplespringrestserver.applications.models.requests.UpdateUser;
-import t.it.simplespringrestserver.applications.models.responses.CurrentUserState;
+import t.it.simplespringrestserver.domains.services.models.AddUser;
+import t.it.simplespringrestserver.domains.services.models.UpdateUser;
+import t.it.simplespringrestserver.domains.services.models.CurrentUserState;
 
 public interface SimpleService {
     Mono<String> getGreetingByName(String name);

@@ -1,4 +1,4 @@
-package t.it.simplespringapp.infrastructures.config;
+package t.it.simplespringapp.commons.config;
 
 import graphql.scalars.ExtendedScalars;
 import org.springframework.context.annotation.Bean;

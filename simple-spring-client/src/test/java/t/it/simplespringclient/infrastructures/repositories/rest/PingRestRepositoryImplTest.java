@@ -14,10 +14,9 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import t.it.simplespringclient.domains.repositories.PingRepository;
 import t.it.simplespringclient.infrastructures.repositories.payloads.responses.MetaResponse;
-import t.it.simplespringclient.applications.models.responses.WebResponse;
+import t.it.simplespringclient.infrastructures.repositories.payloads.responses.WebResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import static org.mockito.Mockito.*;
 
 @ExtendWith(value = {MockitoExtension.class})

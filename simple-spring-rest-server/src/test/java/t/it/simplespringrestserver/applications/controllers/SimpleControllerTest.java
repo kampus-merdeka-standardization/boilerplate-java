@@ -12,10 +12,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
-import t.it.simplespringrestserver.applications.models.requests.AddUser;
-import t.it.simplespringrestserver.applications.models.requests.UpdateUser;
-import t.it.simplespringrestserver.applications.models.responses.CurrentUserState;
-import t.it.simplespringrestserver.applications.models.responses.WebResponse;
+import t.it.simplespringrestserver.domains.services.models.AddUser;
+import t.it.simplespringrestserver.domains.services.models.UpdateUser;
+import t.it.simplespringrestserver.domains.services.models.CurrentUserState;
+import t.it.simplespringrestserver.applications.responses.WebResponse;
 import t.it.simplespringrestserver.domains.services.SimpleService;
 
 import java.time.Instant;

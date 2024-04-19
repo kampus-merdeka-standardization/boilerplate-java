@@ -13,7 +13,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
-import t.it.simplespringapp.applications.models.responses.WebResponse;
+import t.it.simplespringapp.applications.responses.WebResponse;
 import t.it.simplespringapp.domains.services.PingService;
 
 @DirtiesContext

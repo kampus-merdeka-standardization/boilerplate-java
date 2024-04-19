@@ -1,4 +1,4 @@
-package t.it.simplespringclient.applications.models.responses;
+package t.it.simplespringclient.infrastructures.repositories.payloads.responses;
 
 import lombok.Builder;
 import lombok.With;

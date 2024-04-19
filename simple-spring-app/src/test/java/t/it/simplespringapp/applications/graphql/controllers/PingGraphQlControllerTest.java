@@ -10,7 +10,7 @@ import org.springframework.graphql.test.tester.GraphQlTester;
 import org.springframework.test.annotation.DirtiesContext;
 import reactor.core.publisher.Mono;
 import t.it.simplespringapp.domains.services.PingService;
-import t.it.simplespringapp.infrastructures.config.AppConfig;
+import t.it.simplespringapp.commons.config.AppConfig;
 
 
 @DirtiesContext

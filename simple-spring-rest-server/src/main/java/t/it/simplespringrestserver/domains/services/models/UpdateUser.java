@@ -1,4 +1,4 @@
-package t.it.simplespringrestserver.applications.models.requests;
+package t.it.simplespringrestserver.domains.services.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;

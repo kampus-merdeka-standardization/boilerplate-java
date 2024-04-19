@@ -4,8 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-import t.it.simplespringrestserver.applications.models.requests.AddUser;
-import t.it.simplespringrestserver.applications.models.responses.CurrentUserState;
+import t.it.simplespringrestserver.domains.services.models.AddUser;
+import t.it.simplespringrestserver.domains.services.models.CurrentUserState;
 
 import static org.junit.jupiter.api.Assertions.*;
 

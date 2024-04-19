@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import t.it.simplespringclient.domains.repositories.PingRepository;
-import t.it.simplespringclient.applications.models.responses.WebResponse;
+import t.it.simplespringclient.infrastructures.repositories.payloads.responses.WebResponse;
 
 import java.util.Collections;
 

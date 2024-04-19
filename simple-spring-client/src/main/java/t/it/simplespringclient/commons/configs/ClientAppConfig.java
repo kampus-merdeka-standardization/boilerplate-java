@@ -1,4 +1,4 @@
-package t.it.simplespringclient.infrastructures.configs;
+package t.it.simplespringclient.commons.configs;
 
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;

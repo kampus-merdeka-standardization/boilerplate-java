@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
-import t.it.simplespringclient.applications.models.requests.AddProduct;
+import t.it.simplespringclient.domains.services.models.AddProduct;
 import t.it.simplespringclient.applications.models.responses.PersistedProductResponse;
 import t.it.simplespringclient.applications.models.responses.WebResponse;
 import t.it.simplespringclient.domains.services.ProductService;

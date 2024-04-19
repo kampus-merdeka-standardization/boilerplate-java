@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-import t.it.simplespringapp.applications.models.responses.MetaResponse;
-import t.it.simplespringapp.applications.models.responses.WebResponse;
+import t.it.simplespringapp.applications.responses.MetaResponse;
+import t.it.simplespringapp.applications.responses.WebResponse;
 import t.it.simplespringapp.domains.services.PingService;
 
 @RestController
