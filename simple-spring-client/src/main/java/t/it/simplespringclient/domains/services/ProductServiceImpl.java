@@ -65,10 +65,10 @@ public class ProductServiceImpl implements ProductService {
             product.setName(item.name());
             if (item.price() != null || item.year() != null || item.color() != null) {
                 var productDetail = new ProductDetail();
-                productDetail.setPrice(item.price());
-                productDetail.setYear(item.year());
-                productDetail.setColor(item.color());
-                productDetail.setCapacity(item.capacity());
+                Optional.ofNullable(item.price()).ifPresent(productDetail::setPrice);
+                Optional.ofNullable(item.year()).ifPresent(productDetail::setYear);
+                Optional.ofNullable(item.color()).ifPresent(productDetail::setColor);
+                Optional.ofNullable(item.capacity()).ifPresent(productDetail::setCapacity);
                 product.setProductDetail(productDetail);
             }
             return product;
@@ -110,6 +110,8 @@ public class ProductServiceImpl implements ProductService {
     public Mono<PersistedProductDetail> getProductById(String id) {
         return productRepository.findProductById(id).map(product -> PersistedProductDetail.builder()
                 .id(product.getId())
+                .name(product.getName()
+                )
                 .color(product.getProductDetail().getColor())
                 .capacity(product.getProductDetail().getCapacity())
                 .price(product.getProductDetail().getPrice())

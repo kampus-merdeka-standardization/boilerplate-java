@@ -38,7 +38,8 @@ public class ProductRepositoryImpl implements ProductRepository {
         return webClient.get()
                 .uri("/objects")
                 .accept(MediaType.APPLICATION_JSON)
-                .retrieve().bodyToMono(new ParameterizedTypeReference<>() {
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<>() {
                 });
     }
 
@@ -55,7 +56,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Mono<Product> updateSomeProductFields(Mono<Product> product) {
-        return product.flatMap(item -> webClient.put()
+        return product.flatMap(item -> webClient.patch()
                 .uri("/objects/" + item.getId())
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
