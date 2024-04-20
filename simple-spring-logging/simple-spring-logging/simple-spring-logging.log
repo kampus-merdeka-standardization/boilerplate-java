@@ -1,0 +1,115 @@
+2024-04-20 15:35:53.044 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStarting |  | Starting GreetingControllerTest using Java 22 with PID 18765 (started by fajrarisqulla in /Users/fajrarisqulla/boilerplate-java/boiler-plates/simple-spring-logging)
+2024-04-20 15:35:53.046 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStartupProfileInfo |  | No active profile set, falling back to 1 default profile: "default"
+2024-04-20 15:35:54.871 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStarted |  | Started GreetingControllerTest in 2.472 seconds (process running for 4.103)
+2024-04-20 15:35:54.993 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | 3f9e26ea-c406-442c-8233-789d98edf4ec | greeting Hello test!
+2024-04-20 15:35:55.010 | simple-spring-logging | org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler | error | 3f9e26ea-c406-442c-8233-789d98edf4ec | [295d5425]  500 Server Error for HTTP GET "/greeting/Hello%20test!"
+java.lang.NullPointerException: Cannot invoke "reactor.core.publisher.Mono.map(java.util.function.Function)" because "greeting" is null
+	at t.it.simplespringlogging.application.controllers.GreetingController.greeting(GreetingController.java:29)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Error has been observed at the following site(s):
+	*__checkpoint ⇢ HTTP GET "/greeting/Hello%20test!" [ExceptionHandlingWebHandler]
+Original Stack Trace:
+		at t.it.simplespringlogging.application.controllers.GreetingController.greeting(GreetingController.java:29)
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+		at org.springframework.web.reactive.result.method.InvocableHandlerMethod.lambda$invoke$0(InvocableHandlerMethod.java:181)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:132)
+		at reactor.core.publisher.MonoZip$ZipCoordinator.signal(MonoZip.java:297)
+		at reactor.core.publisher.MonoZip$ZipInner.onNext(MonoZip.java:478)
+		at reactor.core.publisher.MonoPeekTerminal$MonoTerminalPeekSubscriber.onNext(MonoPeekTerminal.java:180)
+		at reactor.core.publisher.FluxDefaultIfEmpty$DefaultIfEmptySubscriber.onNext(FluxDefaultIfEmpty.java:122)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+		at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2571)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+		at reactor.core.publisher.FluxFlatMap.trySubscribeScalarMap(FluxFlatMap.java:193)
+		at reactor.core.publisher.MonoFlatMap.subscribeOrReturn(MonoFlatMap.java:53)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:63)
+		at reactor.core.publisher.MonoZip$ZipCoordinator.request(MonoZip.java:220)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.request(MonoFlatMap.java:194)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onSubscribe(MonoIgnoreThen.java:135)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onSubscribe(MonoFlatMap.java:117)
+		at reactor.core.publisher.MonoZip.subscribe(MonoZip.java:129)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:241)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.onComplete(MonoIgnoreThen.java:204)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onComplete(MonoFlatMap.java:189)
+		at reactor.core.publisher.Operators.complete(Operators.java:137)
+		at reactor.core.publisher.MonoZip.subscribe(MonoZip.java:121)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4568)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
+		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
+		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
+		at reactor.core.publisher.MonoNext$NextSubscriber.onNext(MonoNext.java:82)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.innerNext(FluxConcatMapNoPrefetch.java:259)
+		at reactor.core.publisher.FluxConcatMap$ConcatMapInner.onNext(FluxConcatMap.java:865)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
+		at reactor.core.publisher.MonoPeekTerminal$MonoTerminalPeekSubscriber.onNext(MonoPeekTerminal.java:180)
+		at reactor.core.publisher.Operators$ScalarSubscription.request(Operators.java:2571)
+		at reactor.core.publisher.MonoPeekTerminal$MonoTerminalPeekSubscriber.request(MonoPeekTerminal.java:139)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.request(Operators.java:2331)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.request(FluxConcatMapNoPrefetch.java:339)
+		at reactor.core.publisher.MonoNext$NextSubscriber.request(MonoNext.java:108)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
+		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
+		at reactor.core.publisher.MonoNext$NextSubscriber.onSubscribe(MonoNext.java:70)
+		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.onSubscribe(FluxConcatMapNoPrefetch.java:164)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4568)
+		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
+		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4568)
+		at reactor.core.publisher.Mono.subscribeWith(Mono.java:4634)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4534)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4470)
+		at org.springframework.test.web.reactive.server.HttpHandlerConnector.lambda$doConnect$2(HttpHandlerConnector.java:100)
+		at org.springframework.mock.http.client.reactive.MockClientHttpRequest.lambda$writeWith$2(MockClientHttpRequest.java:124)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:45)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4568)
+		at reactor.core.publisher.FluxConcatIterable$ConcatIterableSubscriber.onComplete(FluxConcatIterable.java:148)
+		at reactor.core.publisher.FluxConcatIterable.subscribe(FluxConcatIterable.java:60)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4568)
+		at reactor.core.publisher.Mono.subscribeWith(Mono.java:4634)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4534)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4470)
+		at org.springframework.test.web.reactive.server.HttpHandlerConnector.doConnect(HttpHandlerConnector.java:114)
+		at org.springframework.test.web.reactive.server.HttpHandlerConnector.lambda$connect$0(HttpHandlerConnector.java:81)
+		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:45)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4568)
+		at reactor.core.publisher.MonoSubscribeOn$SubscribeOnSubscriber.run(MonoSubscribeOn.java:126)
+		at reactor.core.scheduler.WorkerTask.call(WorkerTask.java:84)
+		at reactor.core.scheduler.WorkerTask.call(WorkerTask.java:37)
+		at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+		at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:304)
+		at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+		at java.base/java.lang.Thread.run(Thread.java:1570)
+2024-04-20 15:35:55.065 | simple-spring-logging | org.springframework.test.web.reactive.server.ExchangeResult | assertWithDiagnostics |  | Request details for assertion failure:
+
+> GET /greeting/Hello%20test!
+> WebTestClient-Request-Id: [1]
+
+No content
+
+< 500 INTERNAL_SERVER_ERROR Internal Server Error
+< Content-Type: [application/json]
+< Content-Length: [146]
+
+{"timestamp":"2024-04-20T08:35:55.007+00:00","path":"/greeting/Hello%20test!","status":500,"error":"Internal Server Error","requestId":"295d5425"}
+
+2024-04-20 15:36:33.744 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStarting |  | Starting GreetingControllerTest using Java 22 with PID 18784 (started by fajrarisqulla in /Users/fajrarisqulla/boilerplate-java/boiler-plates/simple-spring-logging)
+2024-04-20 15:36:33.745 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStartupProfileInfo |  | No active profile set, falling back to 1 default profile: "default"
+2024-04-20 15:36:34.950 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStarted |  | Started GreetingControllerTest in 1.493 seconds (process running for 2.249)
+2024-04-20 15:36:35.042 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | 5e6d839f-89fb-43cb-a655-17126d476c87 | greeting Hello test!
+2024-04-20 15:36:44.578 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStarting |  | Starting GreetingControllerTest using Java 22 with PID 18794 (started by fajrarisqulla in /Users/fajrarisqulla/boilerplate-java/boiler-plates/simple-spring-logging)
+2024-04-20 15:36:44.579 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStartupProfileInfo |  | No active profile set, falling back to 1 default profile: "default"
+2024-04-20 15:36:45.753 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingControllerTest | logStarted |  | Started GreetingControllerTest in 1.416 seconds (process running for 2.019)
+2024-04-20 15:36:45.844 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | 2bd9d8ac-56cb-413d-be4b-5aafc38e6e6e | greeting test
