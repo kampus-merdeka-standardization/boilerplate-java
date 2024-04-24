@@ -1,0 +1,4 @@
+2024-04-24 14:47:39.886 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStarting |  | Starting SimpleSpringLoggingApplication using Java 22.0.1 with PID 22758 (/Users/fajrarisqulla/other/boilerplate-java/simple-spring-logging/target/classes started by fajrarisqulla in /Users/fajrarisqulla/other/boilerplate-java/simple-spring-logging)
+2024-04-24 14:47:39.887 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStartupProfileInfo |  | No active profile set, falling back to 1 default profile: "default"
+2024-04-24 14:47:40.601 | simple-spring-logging | org.springframework.boot.web.embedded.netty.NettyWebServer | start |  | Netty started on port 8080
+2024-04-24 14:47:40.614 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStarted |  | Started SimpleSpringLoggingApplication in 1.002 seconds (process running for 1.235)
