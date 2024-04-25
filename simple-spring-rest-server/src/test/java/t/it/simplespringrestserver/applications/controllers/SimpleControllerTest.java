@@ -139,7 +139,7 @@ class SimpleControllerTest {
     }
 
     @Nested
-    class UpdateUserByIdTest{
+    class UpdateUserByIdTest {
         @Test
         void testUpdateUserById_Success() {
             UpdateUser updateUser = UpdateUser.builder().newName("fajra").build();
