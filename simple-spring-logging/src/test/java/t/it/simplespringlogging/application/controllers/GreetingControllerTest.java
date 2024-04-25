@@ -43,4 +43,15 @@ class GreetingControllerTest {
 
         verify(greetingService, times(1)).doGreeting(dummyName);
     }
+
+    @Test
+    void testGreeting_Fail() {
+        var dummyName = "test";
+
+        when(greetingService.doGreeting(dummyName)).thenThrow(RuntimeException.class);
+
+        webClient.get().uri("/greeting/" + dummyName).exchange().expectStatus().is5xxServerError();
+
+        verify(greetingService, times(1)).doGreeting(dummyName);
+    }
 }
