@@ -1,5 +1,6 @@
 package t.it.simplespringclient.applications.controllers;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,137 +35,237 @@ class ProductControllerTest {
     @Autowired
     private WebTestClient webClient;
 
-    @Test
-    void testAddProduct_Success() {
-        AddProduct addProduct = AddProduct.builder()
-                .name("product-a")
-                .color("red")
-                .year(2020)
-                .capacity("1 TB")
-                .price(2000000.0).build();
+    @Nested
+    class AddProductTest {
+        @Test
+        void testAddProduct_Success() {
+            AddProduct addProduct = AddProduct.builder()
+                    .name("product-a")
+                    .color("red")
+                    .year(2020)
+                    .capacity("1 TB")
+                    .price(2000000.0).build();
 
-        PersistedProduct persistedProduct = PersistedProduct.builder().price(addProduct.price()).name(addProduct.name()).id("1").build();
+            PersistedProduct persistedProduct = PersistedProduct.builder().price(addProduct.price()).name(addProduct.name()).id("1").build();
 
-        when(productService.addProduct(any())).thenAnswer(invocation -> Mono.just(persistedProduct));
+            when(productService.addProduct(any())).thenAnswer(invocation -> Mono.just(persistedProduct));
 
-        webClient.post().uri("/products").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(addProduct), AddProduct.class).exchange().expectStatus().isCreated().expectBody(new ParameterizedTypeReference<WebResponse<PersistedProduct>>() {
-        }).value(webResponse -> {
-            PersistedProduct actualData = webResponse.data();
-            assertEquals(persistedProduct.id(), actualData.id());
-            assertEquals(persistedProduct.name(), actualData.name());
-            assertEquals(String.valueOf(HttpStatus.CREATED.value()), webResponse.meta().code());
-        });
+            webClient.post().uri("/products").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(addProduct), AddProduct.class).exchange().expectStatus().isCreated().expectBody(new ParameterizedTypeReference<WebResponse<PersistedProduct>>() {
+            }).value(webResponse -> {
+                PersistedProduct actualData = webResponse.data();
+                assertEquals(persistedProduct.id(), actualData.id());
+                assertEquals(persistedProduct.name(), actualData.name());
+                assertEquals(String.valueOf(HttpStatus.CREATED.value()), webResponse.meta().code());
+            });
 
-        verify(productService, times(1)).addProduct(any());
+            verify(productService, times(1)).addProduct(any());
+        }
+
+        @Test
+        void testAddProduct_Fail() {
+            AddProduct addProduct = AddProduct.builder()
+                    .name("product-a")
+                    .color("red")
+                    .year(2020)
+                    .capacity("1 TB")
+                    .price(2000000.0).build();
+
+            when(productService.addProduct(any())).thenThrow(RuntimeException.class);
+
+            webClient.post().uri("/products").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(addProduct), AddProduct.class).exchange().expectStatus().is5xxServerError();
+
+            verify(productService, times(1)).addProduct(any());
+        }
     }
 
-    @Test
-    void testGetProducts_Success() {
-        AddProduct addProduct = AddProduct.builder()
-                .name("product-a")
-                .color("red")
-                .year(2020)
-                .capacity("1 TB")
-                .price(2000000.0).build();
+    @Nested
+    class GetProductsTest{
+        @Test
+        void testGetProducts_Success() {
+            AddProduct addProduct = AddProduct.builder()
+                    .name("product-a")
+                    .color("red")
+                    .year(2020)
+                    .capacity("1 TB")
+                    .price(2000000.0).build();
 
-        PersistedProduct persistedProduct = PersistedProduct.builder().price(addProduct.price()).name(addProduct.name()).id("1").build();
+            PersistedProduct persistedProduct = PersistedProduct.builder().price(addProduct.price()).name(addProduct.name()).id("1").build();
 
-        when(productService.getProducts()).thenReturn(Mono.just(Collections.singletonList(persistedProduct)));
+            when(productService.getProducts()).thenReturn(Mono.just(Collections.singletonList(persistedProduct)));
 
-        webClient.get().uri("/products").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<List<PersistedProduct>>>() {
-        }).value(webResponse -> {
-            assertEquals(1, webResponse.data().size());
-            assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
-        });
+            webClient.get().uri("/products").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<List<PersistedProduct>>>() {
+            }).value(webResponse -> {
+                assertEquals(1, webResponse.data().size());
+                assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
+            });
 
-        verify(productService, times(1)).getProducts();
+            verify(productService, times(1)).getProducts();
+        }
+
+        @Test
+        void testGetProducts_Fail() {
+            when(productService.getProducts()).thenThrow(RuntimeException.class);
+
+            webClient.get().uri("/products").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().is5xxServerError();
+
+            verify(productService, times(1)).getProducts();
+        }
     }
 
-    @Test
-    void testGetProductById_Success() {
-        var dummyId = "1";
-        PersistedProductDetail persistedProductDetail = PersistedProductDetail.builder()
-                .id(dummyId)
-                .color("red")
-                .price(2000000.0)
-                .capacity("1 TB")
-                .createdAt("2020-12-12").build();
+    @Nested
+    class GetProductByIdTest{
+        @Test
+        void testGetProductById_Success() {
+            var dummyId = "1";
+            PersistedProductDetail persistedProductDetail = PersistedProductDetail.builder()
+                    .id(dummyId)
+                    .color("red")
+                    .price(2000000.0)
+                    .capacity("1 TB")
+                    .createdAt("2020-12-12").build();
 
-        when(productService.getProductById(anyString())).thenReturn(Mono.just(persistedProductDetail));
+            when(productService.getProductById(anyString())).thenReturn(Mono.just(persistedProductDetail));
 
-        webClient.get().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<PersistedProductDetail>>() {
-        }).value(webResponse -> {
-            assertEquals(persistedProductDetail, webResponse.data());
-            assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
-        });
+            webClient.get().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<PersistedProductDetail>>() {
+            }).value(webResponse -> {
+                assertEquals(persistedProductDetail, webResponse.data());
+                assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
+            });
 
-        verify(productService, times(1)).getProductById(anyString());
+            verify(productService, times(1)).getProductById(anyString());
+        }
+
+        @Test
+        void testGetProductById_Fail() {
+            var dummyId = "1";
+
+            when(productService.getProductById(anyString())).thenThrow(RuntimeException.class);
+
+            webClient.get().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().is5xxServerError();
+
+            verify(productService, times(1)).getProductById(anyString());
+        }
     }
 
-    @Test
-    void testUpdateAllProductFieldsById_Success() {
-        var dummyId = "1";
-        UpdateProduct updateProduct = UpdateProduct.builder()
-                .id(dummyId)
-                .name("product-a")
-                .color("red")
-                .year(2020)
-                .capacity("1 TB")
-                .price(2000000.0).build();
+    @Nested
+    class UpdateAllProductFieldsByIdTest{
+        @Test
+        void testUpdateAllProductFieldsById_Success() {
+            var dummyId = "1";
+            UpdateProduct updateProduct = UpdateProduct.builder()
+                    .id(dummyId)
+                    .name("product-a")
+                    .color("red")
+                    .year(2020)
+                    .capacity("1 TB")
+                    .price(2000000.0).build();
 
-        PersistedProduct persistedProduct = PersistedProduct.builder().price(updateProduct.price()).name(updateProduct.name()).id("1").build();
+            PersistedProduct persistedProduct = PersistedProduct.builder().price(updateProduct.price()).name(updateProduct.name()).id("1").build();
 
-        when(productService.updateAllProductFields(any())).thenAnswer(invocation -> Mono.just(persistedProduct));
+            when(productService.updateAllProductFields(any())).thenAnswer(invocation -> Mono.just(persistedProduct));
 
-        webClient.put().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(updateProduct), UpdateProduct.class).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<PersistedProduct>>() {
-        }).value(webResponse -> {
-            PersistedProduct actualData = webResponse.data();
-            assertEquals(persistedProduct.id(), actualData.id());
-            assertEquals(persistedProduct.name(), actualData.name());
-            assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
-        });
+            webClient.put().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(updateProduct), UpdateProduct.class).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<PersistedProduct>>() {
+            }).value(webResponse -> {
+                PersistedProduct actualData = webResponse.data();
+                assertEquals(persistedProduct.id(), actualData.id());
+                assertEquals(persistedProduct.name(), actualData.name());
+                assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
+            });
 
-        verify(productService, times(1)).updateAllProductFields(any());
+            verify(productService, times(1)).updateAllProductFields(any());
+        }
+
+        @Test
+        void testUpdateAllProductFieldsById_Fail() {
+            var dummyId = "1";
+            UpdateProduct updateProduct = UpdateProduct.builder()
+                    .id(dummyId)
+                    .name("product-a")
+                    .color("red")
+                    .year(2020)
+                    .capacity("1 TB")
+                    .price(2000000.0).build();
+
+            when(productService.updateAllProductFields(any())).thenThrow(RuntimeException.class);
+
+            webClient.put().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(updateProduct), UpdateProduct.class).exchange().expectStatus().is5xxServerError();
+
+            verify(productService, times(1)).updateAllProductFields(any());
+        }
     }
 
-    @Test
-    void testUpdateSomeProductFieldsById_Success() {
-        var dummyId = "1";
-        UpdateProduct updateProduct = UpdateProduct.builder()
-                .id(dummyId)
-                .name("product-a")
-                .year(2020)
-                .capacity("1 TB")
-                .price(2000000.0).build();
+    @Nested
+    class UpdateSomeProductFieldsByIdTest{
+        @Test
+        void testUpdateSomeProductFieldsById_Success() {
+            var dummyId = "1";
+            UpdateProduct updateProduct = UpdateProduct.builder()
+                    .id(dummyId)
+                    .name("product-a")
+                    .year(2020)
+                    .capacity("1 TB")
+                    .price(2000000.0).build();
 
-        PersistedProduct persistedProduct = PersistedProduct.builder().price(updateProduct.price()).name(updateProduct.name()).id("1").build();
+            PersistedProduct persistedProduct = PersistedProduct.builder().price(updateProduct.price()).name(updateProduct.name()).id("1").build();
 
-        when(productService.updateSomeProductFields(any())).thenAnswer(invocation -> Mono.just(persistedProduct));
+            when(productService.updateSomeProductFields(any())).thenAnswer(invocation -> Mono.just(persistedProduct));
 
-        webClient.patch().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(updateProduct), UpdateProduct.class).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<PersistedProduct>>() {
-        }).value(webResponse -> {
-            PersistedProduct actualData = webResponse.data();
-            assertEquals(persistedProduct.id(), actualData.id());
-            assertEquals(persistedProduct.name(), actualData.name());
-            assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
-        });
+            webClient.patch().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(updateProduct), UpdateProduct.class).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<PersistedProduct>>() {
+            }).value(webResponse -> {
+                PersistedProduct actualData = webResponse.data();
+                assertEquals(persistedProduct.id(), actualData.id());
+                assertEquals(persistedProduct.name(), actualData.name());
+                assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
+            });
 
-        verify(productService, times(1)).updateSomeProductFields(any());
+            verify(productService, times(1)).updateSomeProductFields(any());
+        }
+
+        @Test
+        void testUpdateSomeProductFieldsById_Fail() {
+            var dummyId = "1";
+            UpdateProduct updateProduct = UpdateProduct.builder()
+                    .id(dummyId)
+                    .name("product-a")
+                    .year(2020)
+                    .capacity("1 TB")
+                    .price(2000000.0).build();
+
+            when(productService.updateSomeProductFields(any())).thenThrow(RuntimeException.class);
+
+            webClient.patch().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).body(Mono.just(updateProduct), UpdateProduct.class).exchange().expectStatus().is5xxServerError();
+
+            verify(productService, times(1)).updateSomeProductFields(any());
+        }
     }
 
-    @Test
-    void testDeleteProductById_Success() {
-        var dummyId = "1";
-        var dummyMessage = "Successfully deleted";
+    @Nested
+    class DeleteProductByIdTest{
+        @Test
+        void testDeleteProductById_Success() {
+            var dummyId = "1";
+            var dummyMessage = "Successfully deleted";
 
-        when(productService.deleteProductById(anyString())).thenReturn(Mono.just(dummyMessage));
+            when(productService.deleteProductById(anyString())).thenReturn(Mono.just(dummyMessage));
 
-        webClient.delete().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<Void>>() {
-        }).value(webResponse -> {
-            assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
-            assertEquals(dummyMessage, webResponse.meta().message());
-        });
+            webClient.delete().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(new ParameterizedTypeReference<WebResponse<Void>>() {
+            }).value(webResponse -> {
+                assertEquals(String.valueOf(HttpStatus.OK.value()), webResponse.meta().code());
+                assertEquals(dummyMessage, webResponse.meta().message());
+            });
 
-        verify(productService, times(1)).deleteProductById(anyString());
+            verify(productService, times(1)).deleteProductById(anyString());
+        }
+
+        @Test
+        void testDeleteProductById_Fail() {
+            var dummyId = "1";
+
+            when(productService.deleteProductById(anyString())).thenThrow(RuntimeException.class);
+
+            webClient.delete().uri("/products/" + dummyId).accept(MediaType.APPLICATION_JSON).exchange().expectStatus().is5xxServerError();
+
+            verify(productService, times(1)).deleteProductById(anyString());
+        }
     }
 }
