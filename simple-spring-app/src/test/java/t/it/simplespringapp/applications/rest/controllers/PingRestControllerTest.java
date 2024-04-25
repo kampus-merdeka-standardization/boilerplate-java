@@ -28,7 +28,7 @@ class PingRestControllerTest {
 
     @DirtiesContext
     @Test
-    void ping_ShouldSuccess() {
+    void ping_Success() {
         when(pingService.ping()).thenReturn(Mono.just("pong"));
 
         webClient.get().uri("/ping").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().isOk().expectBody(WebResponse.class).consumeWith(pongResponseEntityExchangeResult -> {
@@ -37,6 +37,16 @@ class PingRestControllerTest {
             assertEquals(String.valueOf(HttpStatus.OK.value()),responseBody.meta().code());
             assertEquals("pong", responseBody.data());
         });
+
+        verify(pingService, times(1)).ping();
+    }
+
+    @DirtiesContext
+    @Test
+    void ping_Fail(){
+        when(pingService.ping()).thenThrow(RuntimeException.class);
+
+        webClient.get().uri("/ping").accept(MediaType.APPLICATION_JSON).exchange().expectStatus().is5xxServerError();
 
         verify(pingService, times(1)).ping();
     }

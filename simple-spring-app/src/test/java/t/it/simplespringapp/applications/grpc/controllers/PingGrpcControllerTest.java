@@ -29,7 +29,7 @@ class PingGrpcControllerTest {
 
     @DirtiesContext
     @Test
-    void testPing() {
+    void testPing_Success() {
         Mockito.when(pingService.ping()).thenReturn(Mono.just("pong"));
 
         MetaResponse metaResponse = MetaResponse.newBuilder().setCode(String.valueOf(Status.OK.getCode().value())).setMessage(Status.OK.getCode().toString()).build();
@@ -56,7 +56,7 @@ class PingGrpcControllerTest {
     }
 
     @Test
-    void testPing_ShouldThrowException() {
+    void testPing_Fail() {
         Mockito.when(pingService.ping()).thenThrow(new RuntimeException("Fail to get response"));
 
         StreamObserver<WebResponse> responseObserver = new StreamObserver<>() {
