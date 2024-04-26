@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    username: cisnux
+    password: cisnux123
+    url: jdbc:db://191.20.10.10:3306/examples
