@@ -9,6 +9,7 @@
         <module>simple-spring-client</module>
         <module>simple-spring-rest-server</module>
         <module>simple-spring-logging</module>
+        <module>simple-spring-config</module>
     </modules>
 
     <groupId>t.it</groupId>
