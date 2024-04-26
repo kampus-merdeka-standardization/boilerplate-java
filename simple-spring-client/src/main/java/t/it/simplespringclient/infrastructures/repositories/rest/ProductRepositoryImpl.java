@@ -3,8 +3,10 @@ package t.it.simplespringclient.infrastructures.repositories.rest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import t.it.simplespringclient.domains.repositories.entities.Product;
@@ -30,6 +32,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(product, Product.class)
                 .retrieve()
+                .onStatus(HttpStatusCode::isError, ClientResponse::createException)
                 .bodyToMono(Product.class);
     }
 
@@ -39,6 +42,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .uri("/objects")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(HttpStatusCode::isError, ClientResponse::createException)
                 .bodyToMono(new ParameterizedTypeReference<>() {
                 });
     }
@@ -51,6 +55,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(item), Product.class)
                 .retrieve()
+                .onStatus(HttpStatusCode::isError, ClientResponse::createException)
                 .bodyToMono(Product.class));
     }
 
@@ -62,6 +67,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(Mono.just(item), Product.class)
                 .retrieve()
+                .onStatus(HttpStatusCode::isError, ClientResponse::createException)
                 .bodyToMono(Product.class));
     }
 
@@ -71,6 +77,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .uri("/objects/" + id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(HttpStatusCode::isError, ClientResponse::createException)
                 .bodyToMono(MetaResponse.class)
                 .map(MetaResponse::message);
     }
@@ -81,6 +88,7 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .uri("/objects/" + id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(HttpStatusCode::isError, ClientResponse::createException)
                 .bodyToMono(Product.class);
     }
 }

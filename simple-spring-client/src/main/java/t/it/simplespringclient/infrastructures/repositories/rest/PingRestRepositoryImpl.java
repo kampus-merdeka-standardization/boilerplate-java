@@ -2,10 +2,14 @@ package t.it.simplespringclient.infrastructures.repositories.rest;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import t.it.simplespringclient.domains.repositories.PingRepository;
 import t.it.simplespringclient.infrastructures.repositories.payloads.responses.WebResponse;
 
@@ -25,6 +29,7 @@ public class PingRestRepositoryImpl implements PingRepository {
                 .uri("/ping")
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
+                .onStatus(HttpStatusCode::isError, ClientResponse::createException)
                 .bodyToMono(new ParameterizedTypeReference<WebResponse<String>>() {
                 })
                 .map(WebResponse::data).flatMapIterable(Collections::singleton);
