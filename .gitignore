@@ -31,4 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+simple-spring-logging/simple-spring-logging
 simple-spring-logging/simple-spring-logging.log
