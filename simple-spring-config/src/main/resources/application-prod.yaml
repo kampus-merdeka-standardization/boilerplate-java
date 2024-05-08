@@ -11,7 +11,7 @@ spring:
   datasource:
     username: ${application.dbUsername}
     password: ${application.dbPassword}
-    url: ${application.dbHost}
+    url: jdbc:db://${application.dbHost}:3306/examples
   application:
     name: ${application.appName}
 server:
