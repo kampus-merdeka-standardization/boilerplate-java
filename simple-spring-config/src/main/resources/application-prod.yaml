@@ -1,5 +1,18 @@
 spring:
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        fail-fast: true
+        name: simple-spring-config
+  config:
+    import: "consul:"
   datasource:
-    username: cisnux
-    password: cisnux123
-    url: jdbc:db://191.20.10.10:3306/examples
+    username: ${application.dbUsername}
+    password: ${application.dbPassword}
+    url: ${application.dbHost}
+  application:
+    name: ${application.appName}
+server:
+  port: ${application.appPort}

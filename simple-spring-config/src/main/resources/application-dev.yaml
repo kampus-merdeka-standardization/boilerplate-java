@@ -1,5 +1,11 @@
 spring:
   datasource:
     username: root
-    password: 123
+    password: root
     url: jdbc:db://localhost:3306/examples
+  application:
+    name: simple-spring-config
+  config:
+    import: "consul:"
+server:
+  port: 5120
