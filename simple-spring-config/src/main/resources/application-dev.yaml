@@ -5,7 +5,9 @@ spring:
     url: jdbc:db://localhost:3306/examples
   application:
     name: simple-spring-config
-  config:
-    import: "consul:"
+# disable consul
+  cloud:
+    consul:
+      enabled: false
 server:
   port: 5120
