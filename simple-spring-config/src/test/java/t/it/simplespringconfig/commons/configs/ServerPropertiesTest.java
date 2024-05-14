@@ -31,7 +31,7 @@ class ServerPropertiesTest {
 
         @Test
         void testConfig() {
-            assertEquals(5150, serverProperties.getPort());
+            assertEquals(9999, serverProperties.getPort());
         }
     }
 }

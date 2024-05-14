@@ -1,18 +1,20 @@
 spring:
   cloud:
     consul:
-      host: localhost
+      host: 108.137.61.233
       port: 8500
       config:
         fail-fast: true
-        name: simple-spring-config
+        prefixes:
+          - ""
+        name: "/"
   config:
     import: "consul:"
   datasource:
-    username: ${application.dbUsername}
-    password: ${application.dbPassword}
-    url: jdbc:db://${application.dbHost}:3306/examples
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: jdbc:db://${DB_HOST}/examples
   application:
-    name: ${application.appName}
+    name: ${APP_NAME}
 server:
-  port: ${application.appPort}
+  port: ${APP_PORT}

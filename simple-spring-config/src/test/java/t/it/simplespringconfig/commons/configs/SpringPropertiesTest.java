@@ -34,10 +34,10 @@ class SpringPropertiesTest {
 
         @Test
         void testConfig() {
-            assertEquals("simple-spring-config", springProperties.getApplication().getName());
-            assertEquals("jdbc:db://191.20.10.10:3306/examples", springProperties.getDatasource().getUrl());
-            assertEquals("developer", springProperties.getDatasource().getUsername());
-            assertEquals("developer123", springProperties.getDatasource().getPassword());
+            assertEquals("simple-config-app-standardization", springProperties.getApplication().getName());
+            assertEquals("jdbc:db://localhost:3360/examples", springProperties.getDatasource().getUrl());
+            assertEquals("kampusmerdeka", springProperties.getDatasource().getUsername());
+            assertEquals("P455w0rd#KaMpuSMerDekA", springProperties.getDatasource().getPassword());
         }
     }
  }
