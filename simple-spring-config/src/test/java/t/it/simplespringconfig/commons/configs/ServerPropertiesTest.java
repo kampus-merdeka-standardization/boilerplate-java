@@ -12,7 +12,7 @@ class ServerPropertiesTest {
     @SpringBootTest
     @Nested
     @ActiveProfiles("dev")
-    class DevConfigTest{
+    class DevConfigTest {
         @Autowired
         private ServerProperties serverProperties;
 
@@ -25,7 +25,7 @@ class ServerPropertiesTest {
     @SpringBootTest
     @Nested
     @ActiveProfiles("prod")
-    class ProdConfigTest{
+    class ProdConfigTest {
         @Autowired
         private ServerProperties serverProperties;
 
