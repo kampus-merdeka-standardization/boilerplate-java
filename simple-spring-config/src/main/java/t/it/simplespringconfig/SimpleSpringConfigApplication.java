@@ -1,11 +1,9 @@
 package t.it.simplespringconfig;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import t.it.simplespringconfig.commons.configs.ServerProperties;
-import t.it.simplespringconfig.commons.configs.SimpleAppProperties;
 import t.it.simplespringconfig.commons.configs.SpringProperties;
 
 @SpringBootApplication

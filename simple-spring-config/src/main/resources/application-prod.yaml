@@ -1,4 +1,6 @@
 spring:
+  config:
+    import: "consul:"
   cloud:
     consul:
       host: 108.137.61.233
@@ -8,8 +10,8 @@ spring:
         prefixes:
           - ""
         name: "/"
-  config:
-    import: "consul:"
+        enabled: true
+      enabled: true
   datasource:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}

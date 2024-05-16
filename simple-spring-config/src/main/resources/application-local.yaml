@@ -1,13 +1,13 @@
 spring:
-  datasource:
-    username: root
-    password: root
-    url: jdbc:db://localhost:3306/examples
-  application:
-    name: simple-spring-config
-# disable consul
+    # disable consul
   cloud:
     consul:
       enabled: false
+  datasource:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: jdbc:db://${DB_HOST}/examples
+  application:
+    name: ${APP_NAME}
 server:
-  port: 5120
+  port: ${APP_PORT}
