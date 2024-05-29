@@ -1,0 +1,7 @@
+2024-05-29 09:31:40.313 | simple-spring-monitoring | t.it.simplespringmonitoring.SimpleSpringMonitoringApplication | logStarting |  | Starting SimpleSpringMonitoringApplication using Java 17.0.11 with PID 17272 (/Users/cisnux/intern-projects/boilerplate-java/simple-spring-monitoring/target/classes started by cisnux in /Users/cisnux/intern-projects/boilerplate-java)
+2024-05-29 09:31:40.314 | simple-spring-monitoring | t.it.simplespringmonitoring.SimpleSpringMonitoringApplication | logStartupProfileInfo |  | No active profile set, falling back to 1 default profile: "default"
+2024-05-29 09:31:40.805 | simple-spring-monitoring | org.springframework.boot.web.embedded.netty.NettyWebServer | start |  | Netty started on port 8080
+2024-05-29 09:31:40.810 | simple-spring-monitoring | t.it.simplespringmonitoring.SimpleSpringMonitoringApplication | logStarted |  | Started SimpleSpringMonitoringApplication in 1.709 seconds (process running for 1.975)
+2024-05-29 09:32:00.915 | simple-spring-monitoring | t.it.simplespringmonitoring.application.controllers.GreetingController | greeting | 4c237d5f-abdc-4f38-8ce1-89d0a07c4573 | greeting fajra
+2024-05-29 09:32:00.917 | simple-spring-monitoring | t.it.simplespringmonitoring.domain.services.GreetingServiceImpl | doGreeting | 4c237d5f-abdc-4f38-8ce1-89d0a07c4573 | greeting fajra
+2024-05-29 09:32:00.917 | simple-spring-monitoring | t.it.simplespringmonitoring.infrastructure.repositories.GreetingRepositoryImpl | getGreeting | 4c237d5f-abdc-4f38-8ce1-89d0a07c4573 | greeting fajra
