@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: simple-spring-monitoring
+otel:
+  instrumentation:
+    logback-appender:
+      enabled: true
+      experimental-log-attributes: true
+      experimental:
+        capture-code-attributes: true
+        capture-key-value-pair-attributes: true
+        capture-marker-attribute: true
+        capture-logger-context-attributes: true
+        capture-mdc-attributes: '*'
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    jmx:
+      exposure:
+        include: '*'

@@ -1,0 +1,47 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+
+processors:
+  # batching helps better compress the data and reduce the number of outgoing connections required to transmit the data
+  batch:
+    send_batch_max_size: 1000
+    send_batch_size: 100
+    timeout: 10s
+
+exporters:
+  # Prometheus Remote Write Exporter sends OpenTelemetry metrics to Prometheus
+  prometheusremotewrite:
+    endpoint: "http://simple-prometheus:9090/api/v1/write"
+  prometheus:
+    endpoint: "0.0.0.0:8888"
+    enable_open_metrics: true
+  loki:
+    endpoint: "http://simple-loki:3100/loki/api/v1/push"
+  otlp/jaeger:
+    endpoint: "http://simple-jaeger:4317"
+    tls:
+      insecure: true
+  otlp/tempo:
+    endpoint: "http://simple-tempo:4317"
+    tls:
+      insecure: true
+  zipkin:
+    endpoint: "http://simple-zipkin:9411/api/v2/spans"
+    format: proto
+
+service:
+  pipelines:
+    metrics:
+      receivers: [ otlp ]
+      processors: [ batch ]
+      exporters: [ prometheusremotewrite ]
+    logs:
+      receivers: [ otlp ]
+      processors: [ batch ]
+      exporters: [ loki ]
+    traces:
+      receivers: [ otlp ]
+      processors: [ batch ]
+      exporters: [ otlp/jaeger,zipkin,otlp/tempo ]
