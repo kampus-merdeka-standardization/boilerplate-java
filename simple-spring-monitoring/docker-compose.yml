@@ -8,7 +8,7 @@ services:
     image: "simple-spring-monitoring:latest"
     environment:
       OTEL_SERVICE_NAME: "simple-spring-monitoring"
-      OTEL_RESOURCE_ATTRIBUTES: "service=simple-spring-monitoring,env=dev"
+      OTEL_RESOURCE_ATTRIBUTES: "service.name=simple-spring-monitoring,service.namespace=simple-monitoring"
       OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://simple-collector:4317"
       # logs are disabled by default

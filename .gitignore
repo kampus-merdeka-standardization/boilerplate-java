@@ -31,6 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
-simple-spring-monitoring/Dockerfile
 simple-spring-logging/simple-spring-logging
 simple-spring-logging/simple-spring-logging.log
