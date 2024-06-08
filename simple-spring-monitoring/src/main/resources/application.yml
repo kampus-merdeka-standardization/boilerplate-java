@@ -12,11 +12,5 @@ otel:
         capture-marker-attribute: true
         capture-logger-context-attributes: true
         capture-mdc-attributes: '*'
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-    jmx:
-      exposure:
-        include: '*'
+    micrometer: # to get jvm matrices
+      enabled: true

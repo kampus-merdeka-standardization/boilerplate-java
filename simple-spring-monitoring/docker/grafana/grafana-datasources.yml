@@ -14,7 +14,7 @@ datasources:
     jsonData:
       httpMethod: GET
       exemplarTraceIdDestinations:
-        - datasourceUid: tempo
+        - datasourceUid: simple-tempo
           name: trace_id
   - name: Loki
     type: loki
@@ -40,9 +40,9 @@ datasources:
     jsonData:
       httpMethod: GET
       serviceMap:
-        datasourceUid: prometheus
+        datasourceUid: simple-prometheus
       tracesToLogsV2:
-        datasourceUid: loki
+        datasourceUid: simple-loki
         spanStartTimeShift: '-1h'
         spanEndTimeShift: '1h'
         filterByTraceID: true
@@ -58,10 +58,10 @@ datasources:
     version: 1
     editable: false
     apiVersion: 1
-    uid: jaeger
+    uid: simple-jaeger
     jsonData:
       tracesToLogsV2:
-        datasourceUid: loki
+        datasourceUid: simple-loki
         spanStartTimeShift: '-1h'
         spanEndTimeShift: '1h'
         filterByTraceID: true
@@ -77,10 +77,10 @@ datasources:
     version: 1
     editable: false
     apiVersion: 1
-    uid: zipkin
+    uid: simple-zipkin
     jsonData:
       tracesToLogsV2:
-        datasourceUid: loki
+        datasourceUid: simple-loki
         spanStartTimeShift: '-1h'
         spanEndTimeShift: '1h'
         filterByTraceID: true
