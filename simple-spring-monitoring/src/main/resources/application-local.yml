@@ -1,0 +1,8 @@
+otel:
+  exporter:
+    otlp:
+      endpoint: http://simple-collector:4317
+  resource:
+    attributes:
+      deployment:
+        environment: local

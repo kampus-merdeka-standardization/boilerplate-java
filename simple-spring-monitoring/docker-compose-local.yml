@@ -1,0 +1,97 @@
+services:
+  simple-spring-monitoring:
+    container_name: simple-spring-monitoring
+    restart: always
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: "simple-spring-monitoring:latest"
+    environment:
+      PROFILE_MODE: local
+    ports:
+      - "8081:8080"
+    depends_on:
+      - simple-collector
+
+  simple-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    container_name: simple-collector
+    restart: always
+    command:
+      - "--config=/etc/otel-collector.yml"
+    volumes:
+      - "./docker/collector/otel-collector.yml:/etc/otel-collector.yml"
+    ports:
+      - "4317:4317"
+      - "8888:8888" # now it's accessible from prometheus
+    depends_on:
+      - simple-jaeger
+      - simple-zipkin
+      - simple-loki
+      - simple-tempo
+
+  simple-tempo:
+    container_name: simple-tempo
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yml" ]
+    volumes:
+      - ./docker/tempo/tempo.yml:/etc/tempo.yml
+    restart: always
+    ports:
+      - "4317"  # otlp grpc
+      - "3200"  # tempo as grafana datasource
+
+  simple-grafana:
+    container_name: simple-grafana
+    image: grafana/grafana:latest
+    volumes:
+      - ./docker/grafana/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+    restart: always
+    ports:
+      - "3001:3000"
+    depends_on:
+      - simple-zipkin
+      - simple-prometheus
+      - simple-jaeger
+      - simple-loki
+      - simple-tempo
+
+  simple-zipkin:
+    container_name: simple-zipkin
+    image: openzipkin/zipkin:latest
+    restart: always
+    ports:
+      - "9411:9411"
+
+  simple-loki:
+    container_name: simple-loki
+    image: grafana/loki:latest
+    command: -config.file=/etc/loki/local-config.yaml
+    restart: always
+    ports:
+      - "3100"
+
+  simple-prometheus:
+    container_name: simple-prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --enable-feature=exemplar-storage
+      - --web.enable-remote-write-receiver
+    restart: always
+    ports:
+      - '9090:9090'
+    depends_on:
+      - simple-collector
+
+  simple-jaeger:
+    container_name: simple-jaeger
+    image: jaegertracing/all-in-one:latest
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    restart: always
+    ports:
+      - "16686:16686"
+      - "4317"

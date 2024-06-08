@@ -2,6 +2,11 @@ spring:
   application:
     name: simple-spring-monitoring
 otel:
+  service:
+    name: simple-spring-monitoring
+  exporter:
+    otlp:
+      protocol: grpc
   instrumentation:
     logback-appender:
       enabled: true
@@ -14,3 +19,8 @@ otel:
         capture-mdc-attributes: '*'
     micrometer: # to get jvm matrices
       enabled: true
+  resource:
+    attributes:
+      service:
+        name: simple-spring-monitoring
+        namespace: simple-monitoring

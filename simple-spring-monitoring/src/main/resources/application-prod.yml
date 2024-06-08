@@ -1,0 +1,8 @@
+otel:
+  exporter:
+    otlp:
+      endpoint: http://otel.shadrachjabonir.my.id:30001
+  resource:
+    attributes:
+      deployment:
+        environment: prod
