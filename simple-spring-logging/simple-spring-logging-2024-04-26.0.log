@@ -1,0 +1,10 @@
+2024-04-26 11:51:34.653 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStarting |  | Starting SimpleSpringLoggingApplication using Java 17.0.11 with PID 8739 (/Users/cisnux/intern-projects/boilerplate-java/simple-spring-logging/target/classes started by cisnux in /Users/cisnux/intern-projects/boilerplate-java)
+2024-04-26 11:51:34.655 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStartupProfileInfo |  | No active profile set, falling back to 1 default profile: "default"
+2024-04-26 11:51:35.136 | simple-spring-logging | org.springframework.boot.web.embedded.netty.NettyWebServer | start |  | Netty started on port 8080
+2024-04-26 11:51:35.140 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStarted |  | Started SimpleSpringLoggingApplication in 0.685 seconds (process running for 0.994)
+2024-04-26 11:52:04.581 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | 8c5bc691-89fc-46a4-9915-34e2816bbfe4 | greeting fajra
+2024-04-26 11:52:04.582 | simple-spring-logging | t.it.simplespringlogging.domain.services.GreetingServiceImpl | doGreeting | 8c5bc691-89fc-46a4-9915-34e2816bbfe4 | greeting fajra
+2024-04-26 11:52:04.582 | simple-spring-logging | t.it.simplespringlogging.infrastructure.repositories.GreetingRepositoryImpl | getGreeting | 8c5bc691-89fc-46a4-9915-34e2816bbfe4 | greeting fajra
+2024-04-26 11:52:08.391 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | dfcd30f4-f449-4995-8a26-2877d16d033d | greeting cisnux
+2024-04-26 11:52:08.392 | simple-spring-logging | t.it.simplespringlogging.domain.services.GreetingServiceImpl | doGreeting | dfcd30f4-f449-4995-8a26-2877d16d033d | greeting cisnux
+2024-04-26 11:52:08.393 | simple-spring-logging | t.it.simplespringlogging.infrastructure.repositories.GreetingRepositoryImpl | getGreeting | dfcd30f4-f449-4995-8a26-2877d16d033d | greeting cisnux
