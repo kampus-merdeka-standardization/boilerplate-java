@@ -1,10 +1,7 @@
 otel:
   exporter:
     otlp:
-      traces:
-        endpoint: http://otel.shadrachjabonir.my.id:30001
-      metrics:
-        endpoint: http://103.127.137.201:30002
+      endpoint: http://otel.shadrachjabonir.my.id:30001
   resource:
     attributes:
       deployment:

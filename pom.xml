@@ -32,6 +32,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <opentelemetry-bom.version>1.38.0</opentelemetry-bom.version>
         <opentelemetry-instrumentation-bom.verion>2.4.0-alpha</opentelemetry-instrumentation-bom.verion>
+        <graalvm.version>0.10.2</graalvm.version>
     </properties>
 
     <dependencyManagement>
@@ -117,6 +118,11 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>org.graalvm.buildtools</groupId>
+                    <artifactId>native-maven-plugin</artifactId>
+                    <version>${graalvm.version}</version>
+                </plugin>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
