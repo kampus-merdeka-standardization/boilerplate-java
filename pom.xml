@@ -11,6 +11,7 @@
         <module>simple-spring-logging</module>
         <module>simple-spring-config</module>
         <module>simple-spring-monitoring</module>
+        <module>simple-spring-database</module>
     </modules>
 
     <groupId>t.it</groupId>
@@ -33,10 +34,18 @@
         <opentelemetry-bom.version>1.38.0</opentelemetry-bom.version>
         <opentelemetry-instrumentation-bom.verion>2.4.0-alpha</opentelemetry-instrumentation-bom.verion>
         <graalvm.version>0.10.2</graalvm.version>
+        <spring-cloud.version>2023.0.1</spring-cloud.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>io.opentelemetry</groupId>
                 <artifactId>opentelemetry-bom</artifactId>

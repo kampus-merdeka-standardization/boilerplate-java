@@ -21,7 +21,7 @@ public class SimpleAppProperties {
 
     @PostConstruct
     public void init() {
-        System.out.println("APP_NAME\t: " + port);
+        System.out.println("APP_PORT\t: " + port);
         System.out.println("APP_NAME\t: " + name);
         System.out.println("DB_HOST\t: " + dbHost);
         System.out.println("DB_USERNAME\t: " + dbUsername);
