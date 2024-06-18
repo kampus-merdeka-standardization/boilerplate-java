@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 import t.it.simplespringclient.domains.services.models.PersistedProductDetail;
 import t.it.simplespringclient.domains.services.models.AddProduct;
 import t.it.simplespringclient.domains.services.models.PersistedProduct;
-import t.it.simplespringclient.applications.models.responses.WebResponse;
+import t.it.simplespringclient.applications.payloads.responses.WebResponse;
 import t.it.simplespringclient.domains.services.ProductService;
 import t.it.simplespringclient.domains.services.models.UpdateProduct;
 
