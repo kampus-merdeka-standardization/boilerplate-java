@@ -128,7 +128,6 @@ public class ProductServiceImpl implements ProductService {
                                         ))
                                         .flatMap(product -> productRepository.updateProduct(
                                                 product
-                                                        .withCreatedAt(product.createdAt())
                                                         .withName(updateAllProduct.name())
                                                         .withDescription(updateAllProduct.description())
                                                         .withPrice(updateAllProduct.price())

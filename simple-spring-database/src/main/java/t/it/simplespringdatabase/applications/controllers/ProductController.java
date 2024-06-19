@@ -49,16 +49,16 @@ public class ProductController {
 
     @PutMapping(path = "/products/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<WebResponse<PersistedProduct>> updateAllProductFields(@PathVariable("id") String id, @RequestBody Mono<UpdateAllProduct> updateProduct) {
-        return productService.updateAllProductFields(updateProduct.map(item -> item.withId(id))).map(persistedProductResponses -> WebResponse.<PersistedProduct>builder()
-                .data(persistedProductResponses)
+        return productService.updateAllProductFields(updateProduct.map(item -> item.withId(id))).map(persistedProduct -> WebResponse.<PersistedProduct>builder()
+                .data(persistedProduct)
                 .meta(MetaResponse.builder().code(String.valueOf(HttpStatus.OK.value())).message(HttpStatus.OK.getReasonPhrase()).build())
                 .build());
     }
 
     @PatchMapping(path = "/products/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mono<WebResponse<PersistedProduct>> updateSomeProductFields(@PathVariable("id") String id, @RequestBody Mono<UpdateSomeProduct> updateProduct) {
-        return productService.updateSomeProductFields(updateProduct.map(item -> item.withId(id))).map(persistedProductResponses -> WebResponse.<PersistedProduct>builder()
-                .data(persistedProductResponses)
+        return productService.updateSomeProductFields(updateProduct.map(item -> item.withId(id))).map(persistedProduct -> WebResponse.<PersistedProduct>builder()
+                .data(persistedProduct)
                 .meta(MetaResponse.builder().code(String.valueOf(HttpStatus.OK.value())).message(HttpStatus.OK.getReasonPhrase()).build())
                 .build());
     }

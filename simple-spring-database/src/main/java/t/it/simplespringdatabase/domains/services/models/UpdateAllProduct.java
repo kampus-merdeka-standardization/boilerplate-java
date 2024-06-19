@@ -19,10 +19,10 @@ public record UpdateAllProduct(
         @JsonIgnore
         String id,
         @NotBlank(message = "the name field must be filled")
-        @Size(max = 255, message = "the length of name must not greater than {max}")
+        @Size(max = 150, message = "the length of name must not greater than {max}")
         String name,
-        @Range(min = 1L, max = 9_999_999_999L, message = "the price field must be between {min} and {max}")
         @NotNull(message = "the price field must be filled")
+        @Range(min = 1L, max = 9_999_999_999L, message = "the price field must be between {min} and {max}")
         BigDecimal price,
         @Min(value = 1L, message = "the minimum value of quantity must be {value}")
         @NotNull(message = "the quantity field must be filled")

@@ -15,7 +15,7 @@ public record UpdateSomeProduct(
         @Size(max = 36, message = "the length of id must not greater than {max}")
         @JsonIgnore
         String id,
-        @Size(max = 255, message = "the length of name must not greater than {max}")
+        @Size(max = 150, message = "the length of name must not greater than {max}")
         String name,
         @Range(min = 1L, max = 9_999_999_999L, message = "the price field must be between {min} and {max}")
         BigDecimal price,
