@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 @Builder
 @With
@@ -20,6 +21,8 @@ public record UpdateSomeProduct(
         BigDecimal price,
         @Min(value = 1L, message = "the minimum value of quantity must be {value}")
         Integer quantity,
-        String description
+        String description,
+        @NotNull(message = "the updatedAt field must be filled")
+        OffsetDateTime updatedAt
 ) {
 }

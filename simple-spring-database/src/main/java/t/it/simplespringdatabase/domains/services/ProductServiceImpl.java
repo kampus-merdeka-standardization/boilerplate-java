@@ -37,6 +37,8 @@ public class ProductServiceImpl implements ProductService {
                                                         .description(productItem.description())
                                                         .price(productItem.price())
                                                         .quantity(productItem.quantity())
+                                                        .createdAt(productItem.createdAt())
+                                                        .updatedAt(productItem.createdAt())
                                                         .build()
                                         )))
                 )
@@ -46,6 +48,8 @@ public class ProductServiceImpl implements ProductService {
                         .id(product.id())
                         .name(product.name())
                         .price(product.price())
+                        .createdAt(product.createdAt())
+                        .updatedAt(product.updatedAt())
                         .build())
                 .subscribeOn(Schedulers.parallel());
     }
@@ -58,6 +62,8 @@ public class ProductServiceImpl implements ProductService {
                                 .id(product.id())
                                 .name(product.name())
                                 .price(product.price())
+                                .createdAt(product.createdAt())
+                                .updatedAt(product.updatedAt())
                                 .build()
                 )
                 .subscribeOn(Schedulers.parallel());
@@ -86,13 +92,17 @@ public class ProductServiceImpl implements ProductService {
                                                     Optional.ofNullable(updateSomeProduct.price()).ifPresent(productBuilder::price);
 
                                                     return productRepository.updateProduct(
-                                                            productBuilder.build()
+                                                            productBuilder
+                                                                    .updatedAt(updateSomeProduct.updatedAt())
+                                                                    .build()
                                                     );
                                                 })
                                                 .map(productEntity -> PersistedProduct.builder()
                                                         .id(productEntity.id())
                                                         .name(productEntity.name())
                                                         .price(productEntity.price())
+                                                        .createdAt(productEntity.createdAt())
+                                                        .updatedAt(productEntity.updatedAt())
                                                         .build()
                                                 )
                                                 .subscribeOn(Schedulers.parallel())
@@ -122,12 +132,15 @@ public class ProductServiceImpl implements ProductService {
                                                         .withName(updateAllProduct.name())
                                                         .withDescription(updateAllProduct.description())
                                                         .withPrice(updateAllProduct.price())
+                                                        .withUpdatedAt(updateAllProduct.updatedAt())
                                                         .withQuantity(updateAllProduct.quantity())
                                         ))
                                         .map(product -> PersistedProduct.builder()
                                                 .id(product.id())
                                                 .name(product.name())
                                                 .price(product.price())
+                                                .createdAt(product.createdAt())
+                                                .updatedAt(product.updatedAt())
                                                 .build())
                                         .subscribeOn(Schedulers.parallel())
                         )

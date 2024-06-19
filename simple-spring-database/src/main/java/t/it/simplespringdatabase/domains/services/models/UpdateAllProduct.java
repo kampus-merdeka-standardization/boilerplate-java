@@ -9,6 +9,7 @@ import lombok.*;
 import org.hibernate.validator.constraints.Range;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 @Builder
 @With
@@ -27,6 +28,8 @@ public record UpdateAllProduct(
         @NotNull(message = "the quantity field must be filled")
         Integer quantity,
         @NotBlank(message = "the description field must be filled")
-        String description
+        String description,
+        @NotNull(message = "the updatedAt field must be filled")
+        OffsetDateTime updatedAt
 ) {
 }

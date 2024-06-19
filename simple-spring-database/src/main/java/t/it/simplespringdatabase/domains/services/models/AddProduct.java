@@ -2,12 +2,14 @@ package t.it.simplespringdatabase.domains.services.models;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.With;
 import org.hibernate.validator.constraints.Range;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 @Builder
 @With
@@ -20,6 +22,8 @@ public record AddProduct(
         @Min(value = 1L, message = "the minimum value of quantity must be {value}")
         Integer quantity,
         @NotBlank(message = "the description field must be filled")
-        String description
+        String description,
+        @NotNull(message = "the createdAt field must be filled")
+        OffsetDateTime createdAt
 ) {
 }

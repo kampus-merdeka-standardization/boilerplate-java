@@ -22,7 +22,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public Flux<Product> findProducts() {
-        return mySqlProductDao.findAll();
+        return mySqlProductDao.findAllByOrderByCreatedAtDesc();
     }
 
     @Override
