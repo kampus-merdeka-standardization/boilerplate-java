@@ -110,8 +110,7 @@ public class ProductServiceImpl implements ProductService {
     public Mono<PersistedProductDetail> getProductById(String id) {
         return productRepository.findProductById(id).map(product -> PersistedProductDetail.builder()
                 .id(product.getId())
-                .name(product.getName()
-                )
+                .name(product.getName())
                 .color(product.getProductDetail().getColor())
                 .capacity(product.getProductDetail().getCapacity())
                 .price(product.getProductDetail().getPrice())
