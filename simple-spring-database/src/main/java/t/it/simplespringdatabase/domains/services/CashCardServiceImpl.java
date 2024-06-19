@@ -2,8 +2,6 @@ package t.it.simplespringdatabase.domains.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.data.relational.core.sql.LockMode;
-import org.springframework.data.relational.repository.Lock;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
@@ -99,8 +97,6 @@ public class CashCardServiceImpl implements CashCardService {
                 .subscribeOn(Schedulers.parallel());
     }
 
-    // SELECT FOR UPDATE
-    @Lock(value = LockMode.PESSIMISTIC_WRITE)
     @Override
     public Mono<PersistedCashCardDetail> getCashCardById(String id) {
         return cashCardRepository.findCashCardById(id)
