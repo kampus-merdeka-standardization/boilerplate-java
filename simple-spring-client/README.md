@@ -1,6 +1,6 @@
 ## Overview
 
-This repository provides a comprehensive set of code examples to make simple client requests from spring application to RESTful, GraphQL dan gRPC Server.
+This repository provides a comprehensive set of code examples to make simple client requests from spring application to RESTful, GraphQL and gRPC Server.
 
 ## Getting Started
 
