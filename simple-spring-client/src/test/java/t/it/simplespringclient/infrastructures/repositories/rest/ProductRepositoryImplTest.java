@@ -16,7 +16,7 @@ import reactor.test.StepVerifier;
 import t.it.simplespringclient.domains.repositories.ProductRepository;
 import t.it.simplespringclient.domains.repositories.entities.Product;
 import t.it.simplespringclient.domains.repositories.entities.ProductDetail;
-import t.it.simplespringclient.infrastructures.repositories.payloads.responses.MetaResponse;
+import t.it.simplespringclient.infrastructures.repositories.responses.MetaResponse;
 
 import java.nio.charset.Charset;
 import java.util.Collections;

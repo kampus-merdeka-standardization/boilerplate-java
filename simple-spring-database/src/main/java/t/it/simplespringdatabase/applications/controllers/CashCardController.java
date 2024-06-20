@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-import t.it.simplespringdatabase.applications.payloads.responses.MetaResponse;
-import t.it.simplespringdatabase.applications.payloads.responses.WebResponse;
+import t.it.simplespringdatabase.applications.responses.MetaResponse;
+import t.it.simplespringdatabase.applications.responses.WebResponse;
 import t.it.simplespringdatabase.domains.services.CashCardService;
 import t.it.simplespringdatabase.domains.services.models.*;
 

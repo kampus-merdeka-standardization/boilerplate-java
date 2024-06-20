@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import t.it.simplespringclient.domains.repositories.entities.Product;
 import t.it.simplespringclient.domains.repositories.ProductRepository;
-import t.it.simplespringclient.infrastructures.repositories.payloads.responses.MetaResponse;
+import t.it.simplespringclient.infrastructures.repositories.responses.MetaResponse;
 
 import java.util.List;
 

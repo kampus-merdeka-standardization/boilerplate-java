@@ -6,8 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
-import t.it.simplespringdatabase.applications.payloads.responses.MetaResponse;
-import t.it.simplespringdatabase.applications.payloads.responses.WebResponse;
+import t.it.simplespringdatabase.applications.responses.MetaResponse;
+import t.it.simplespringdatabase.applications.responses.WebResponse;
 import t.it.simplespringdatabase.domains.services.ProductService;
 import t.it.simplespringdatabase.domains.services.models.*;
 

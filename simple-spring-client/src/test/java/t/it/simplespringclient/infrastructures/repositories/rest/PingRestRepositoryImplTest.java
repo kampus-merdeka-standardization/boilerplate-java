@@ -15,8 +15,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import t.it.simplespringclient.domains.repositories.PingRepository;
-import t.it.simplespringclient.infrastructures.repositories.payloads.responses.MetaResponse;
-import t.it.simplespringclient.infrastructures.repositories.payloads.responses.WebResponse;
+import t.it.simplespringclient.infrastructures.repositories.responses.MetaResponse;
+import t.it.simplespringclient.infrastructures.repositories.responses.WebResponse;
 
 import java.nio.charset.Charset;
 

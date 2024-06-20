@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package t.it.simplespringapp.services;
+
 import "web_response.proto";
 import "google/protobuf/empty.proto";
 

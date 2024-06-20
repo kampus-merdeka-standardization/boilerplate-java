@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import reactor.core.publisher.Mono;
-import t.it.simplespringdatabase.applications.payloads.responses.MetaResponse;
-import t.it.simplespringdatabase.applications.payloads.responses.WebResponse;
+import t.it.simplespringdatabase.applications.responses.MetaResponse;
+import t.it.simplespringdatabase.applications.responses.WebResponse;
 import t.it.simplespringdatabase.commons.exceptions.ApiException;
 
 @Slf4j
