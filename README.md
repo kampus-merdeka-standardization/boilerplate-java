@@ -14,7 +14,7 @@ The repository is organized into multiple modules, each demonstrating different 
 - **[simple-spring-database](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/main/simple-spring-database)**: Reactive Database interactions and ORM setup by using R2DBC.
 - **[simple-spring-logging](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/main/simple-spring-logging)**: Logging configurations and examples.
 - **[simple-spring-monitoring](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/main/simple-spring-monitoring)**: Integration with Open Telemetry.
-- **[simple-spring-rest-server](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/main/simple-spring-rest-server)**: RESTful server setup and examples.
+- **[simple-spring-rest-server](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/main/simple-spring-rest-server)**: RESTful server setup and examples by using Spring Web Flux.
 
 ## Getting Started
 
