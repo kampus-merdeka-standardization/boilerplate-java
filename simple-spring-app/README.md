@@ -10,7 +10,7 @@ This repository provides a comprehensive set of code examples to make simple RES
 - Apache Maven 3.6.0 or higher
 - An IDE such as IntelliJ IDEA or Eclipse
 
-### Running Examples
+### Running Application
 1. Run spring application
    ```sh
    mvn spring-boot:run
