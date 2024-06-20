@@ -9,7 +9,6 @@ import reactor.core.publisher.Mono;
 import t.it.simplespringdatabase.domains.repositories.entities.CashCard;
 
 @Component
-@SuppressWarnings("null")
 public interface MySqlCashCardDao extends R2dbcRepository<CashCard, String> {
     // SELECT FOR UPDATE
     @Lock(LockMode.PESSIMISTIC_WRITE)
