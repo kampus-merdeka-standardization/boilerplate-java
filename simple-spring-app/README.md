@@ -43,5 +43,5 @@ Each module is a standalone Spring Boot application. To run an example, navigate
 Each module is a standalone Spring Boot application. To run an example, navigate to the module directory and use Maven to start the application:
 
 ```sh
-mvn clean test
+mvn test
 ```
