@@ -1,0 +1,19 @@
+2024-06-10 21:10:17.471 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStarting |  | Starting SimpleSpringLoggingApplication using Java 17.0.11 with PID 98427 (/Users/cisnux/intern-projects/boilerplate-java/simple-spring-logging/target/classes started by cisnux in /Users/cisnux/intern-projects/boilerplate-java)
+2024-06-10 21:10:17.475 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStartupProfileInfo |  | No active profile set, falling back to 1 default profile: "default"
+2024-06-10 21:10:18.077 | simple-spring-logging | org.springframework.boot.web.embedded.netty.NettyWebServer | start |  | Netty started on port 8080
+2024-06-10 21:10:18.081 | simple-spring-logging | t.it.simplespringlogging.SimpleSpringLoggingApplication | logStarted |  | Started SimpleSpringLoggingApplication in 0.88 seconds (process running for 1.244)
+2024-06-10 21:12:29.436 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | 057ba99a-f5b1-4396-8060-2e8a4ec30049 | greeting he
+2024-06-10 21:12:29.438 | simple-spring-logging | t.it.simplespringlogging.domain.services.GreetingServiceImpl | doGreeting | 057ba99a-f5b1-4396-8060-2e8a4ec30049 | greeting he
+2024-06-10 21:12:29.438 | simple-spring-logging | t.it.simplespringlogging.infrastructure.repositories.GreetingRepositoryImpl | getGreeting | 057ba99a-f5b1-4396-8060-2e8a4ec30049 | greeting he
+2024-06-10 21:12:31.885 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | b5e92056-4a9a-4b71-985b-924c23a73168 | greeting fajra
+2024-06-10 21:12:31.886 | simple-spring-logging | t.it.simplespringlogging.domain.services.GreetingServiceImpl | doGreeting | b5e92056-4a9a-4b71-985b-924c23a73168 | greeting fajra
+2024-06-10 21:12:31.886 | simple-spring-logging | t.it.simplespringlogging.infrastructure.repositories.GreetingRepositoryImpl | getGreeting | b5e92056-4a9a-4b71-985b-924c23a73168 | greeting fajra
+2024-06-10 21:12:33.954 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | dd0d28b7-257b-43c7-af8e-613ac6d86e3b | greeting he
+2024-06-10 21:12:33.954 | simple-spring-logging | t.it.simplespringlogging.domain.services.GreetingServiceImpl | doGreeting | dd0d28b7-257b-43c7-af8e-613ac6d86e3b | greeting he
+2024-06-10 21:12:33.954 | simple-spring-logging | t.it.simplespringlogging.infrastructure.repositories.GreetingRepositoryImpl | getGreeting | dd0d28b7-257b-43c7-af8e-613ac6d86e3b | greeting he
+2024-06-10 21:12:34.725 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | 1d344243-7db2-49ba-aa41-941a087695ac | greeting fajra
+2024-06-10 21:12:34.725 | simple-spring-logging | t.it.simplespringlogging.domain.services.GreetingServiceImpl | doGreeting | 1d344243-7db2-49ba-aa41-941a087695ac | greeting fajra
+2024-06-10 21:12:34.725 | simple-spring-logging | t.it.simplespringlogging.infrastructure.repositories.GreetingRepositoryImpl | getGreeting | 1d344243-7db2-49ba-aa41-941a087695ac | greeting fajra
+2024-06-10 21:15:49.469 | simple-spring-logging | t.it.simplespringlogging.application.controllers.GreetingController | greeting | 588a0fa5-59bd-41e9-8119-140558e539cd | greeting fajra
+2024-06-10 21:15:49.470 | simple-spring-logging | t.it.simplespringlogging.domain.services.GreetingServiceImpl | doGreeting | 588a0fa5-59bd-41e9-8119-140558e539cd | greeting fajra
+2024-06-10 21:15:49.470 | simple-spring-logging | t.it.simplespringlogging.infrastructure.repositories.GreetingRepositoryImpl | getGreeting | 588a0fa5-59bd-41e9-8119-140558e539cd | greeting fajra
