@@ -57,5 +57,5 @@ Replace `simple-spring-app` with the desired module directory.
 - **Reactive Database Interactions**: Provides examples of setting up and interacting with databases using Spring Data R2DBC.
 - **Logging**: Configures and demonstrates logging using Logback.
 - **Monitoring**: Provides examples of setting and interacting with OpenTelemetry then export the data to desired traces, logs, and metrics tools.
-- **Reactive RESTful Services**: Sets up and provides examples of RESTful web services using Spring Web Flux.
+- **RESTful Services**: Sets up and provides examples of RESTful web services using Spring Web Flux.
 - **Unit Test**: Shows how to make unit tests on Spring Application.
