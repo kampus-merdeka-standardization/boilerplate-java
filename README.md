@@ -10,7 +10,7 @@ The repository is organized into multiple modules, each demonstrating different 
 
 - **[simple-spring-app](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/main/simple-spring-app)**: Basic Spring application setup and demonstrates how to implement RESTful, GraphQL, and gRPC API on Spring application.
 - **[simple-spring-client](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/main/simple-spring-client)**: Examples of make client requests for RESTful, GraphQL, and gRPC Server.
-- **[simple-spring-config](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/11709fd15a1f9db114051ba4ec56f7d942909254/simple-spring-config)**: Integration with Cloud Consul to manage configurations.
+- **[simple-spring-config](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/main/simple-spring-config)**: Integration with Cloud Consul to manage configurations.
 - **[simple-spring-database](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/11709fd15a1f9db114051ba4ec56f7d942909254/simple-spring-database)**: Reactive Database interactions and ORM setup.
 - **[simple-spring-logging](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/11709fd15a1f9db114051ba4ec56f7d942909254/simple-spring-logging)**: Logging configurations and examples.
 - **[simple-spring-monitoring](https://github.com/kampus-merdeka-standardization/boilerplate-java/tree/11709fd15a1f9db114051ba4ec56f7d942909254/simple-spring-monitoring)**: Integration with Open Telemetry.

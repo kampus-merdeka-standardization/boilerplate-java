@@ -11,7 +11,7 @@ This repository shows how to integrate configurations from Cloud Consul on Sprin
 - Cloud Consul
 
 ### Running Application
-1. Set ***PROFILE_MODE***
+1. Set and export ***PROFILE_MODE***
     ```sh
     export PROFILE_MODE=local
    ```
@@ -26,6 +26,7 @@ This repository shows how to integrate configurations from Cloud Consul on Sprin
     ```
 3. Or run on production
     ```sh
+    PROFILE_MODE=prod
     mvn spring-boot:run -Dspring-boot.run.profiles=$PROFILE_MODE
     ```
 ### Running Unit Tests
