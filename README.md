@@ -8,12 +8,12 @@ This repository provides a comprehensive set of boilerplate code examples for ru
 
 The repository is organized into multiple modules, each demonstrating different aspects of the Spring Framework and its ecosystem:
 
-- **simple-spring-app**: Basic Spring application setup and examples.
-- **simple-spring-client**: Examples of transactional and optimistic locking.
-- **simple-spring-config**: Configuration management using Spring Config.
-- **simple-spring-database**: Database interactions and ORM setup.
+- **simple-spring-app**: Basic Spring application setup and demonstrates how to implement RESTful, GraphQL, and gRPC API on Spring application.
+- **simple-spring-client**: Examples of make client requests for RESTful, GraphQL, and gRPC Server.
+- **simple-spring-config**: Integration with Cloud Consul to manage configurations.
+- **simple-spring-database**: Reactive Database interactions and ORM setup.
 - **simple-spring-logging**: Logging configurations and examples.
-- **simple-spring-monitoring**: Integration with monitoring tools.
+- **simple-spring-monitoring**: Integration with Open Telemetry.
 - **simple-spring-rest-server**: RESTful server setup and examples.
 
 ## Getting Started
@@ -58,3 +58,4 @@ Replace `simple-spring-app` with the desired module directory.
 - **Logging**: Configures and demonstrates logging using Logback.
 - **Monitoring**: Provides examples of setting and interacting with OpenTelemetry then export the data to desired traces, logs, and metrics tools.
 - **Reactive RESTful Services**: Sets up and provides examples of RESTful web services using Spring Web Flux.
+- **Unit Test**: Shows how to make unit tests on Spring Application.
