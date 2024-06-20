@@ -22,6 +22,7 @@ public class CashCardServiceImpl implements CashCardService {
     private final ValidationService validationService;
 
     @Override
+    @Transactional
     public Mono<PersistedCashCard> addCashCard(Mono<AddCashCard> addCashCard) {
         return addCashCard
                 .flatMap(
