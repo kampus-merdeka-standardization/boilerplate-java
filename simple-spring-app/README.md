@@ -11,8 +11,6 @@ This repository provides a comprehensive set of code examples to make simple RES
 - An IDE such as IntelliJ IDEA or Eclipse
 
 ### Running Examples
-
-Each module is a standalone Spring Boot application. To run an example, navigate to the module directory and use Maven to start the application:
 1. Run spring application
    ```sh
    mvn spring-boot:run
