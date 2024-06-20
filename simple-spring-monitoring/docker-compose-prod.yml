@@ -1,11 +1,5 @@
 services:
   simple-spring-monitoring:
-    container_name: simple-spring-monitoring
-    restart: always
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    image: "simple-spring-monitoring:latest"
     environment:
       PROFILE_MODE: "prod"
     ports:
