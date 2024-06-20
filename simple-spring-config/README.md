@@ -1,5 +1,4 @@
 ## Overview
-
 This repository shows how to integrate configurations from Cloud Consul on Spring Application by using Spring Cloud Config.
 
 ## Getting Started
