@@ -9,6 +9,9 @@ This repository provides a comprehensive set of code examples to make simple RES
 - Java Development Kit (JDK) 17 or higher
 - Apache Maven 3.6.0 or higher
 - An IDE such as IntelliJ IDEA or Eclipse
+- Postman
+- cURL
+- grpcURL
 
 ### Running Application
 1. Run spring application
@@ -29,7 +32,7 @@ This repository provides a comprehensive set of code examples to make simple RES
   -d '{"query": "{ message }"}' \
   http://localhost:8080/graphql
    ```
-* **gRPC API**
+* **gRPC API**\
   for GraphQL API to make a client request, we could use grpcurl or tools like Postman.
   ```sh
   grpcurl -plaintext -d '{}' \
