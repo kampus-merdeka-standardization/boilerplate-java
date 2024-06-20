@@ -23,6 +23,7 @@ public class ProductServiceImpl implements ProductService {
     private final ValidationService validationService;
 
     @Override
+    @Transactional
     public Mono<PersistedProduct> addProduct(Mono<AddProduct> addProduct) {
         return addProduct
                 .flatMap(
