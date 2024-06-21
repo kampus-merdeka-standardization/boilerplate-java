@@ -20,7 +20,7 @@ This repository provides a comprehensive set of code examples to make simple cli
     ```sh
     mvn spring-boot:run
     ```
-3. Or run on production\
+3. Or run on production
    * First, set env variables for ***RESTFUL_API_KEYSTORE*** and ***RESTFUL_API_KEYSTORE_PASSWORD*** 
     ```sh
    export RESTFUL_API_KEYSTORE=/etc/your_keystore.jks
