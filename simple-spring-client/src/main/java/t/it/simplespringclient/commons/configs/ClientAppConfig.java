@@ -37,6 +37,7 @@ public class ClientAppConfig {
     private String keyStorePath;
     @Value("${RESTFUL_API_KEYSTORE_PASSWORD}")
     private String keyStorePassword;
+    // will be assigned automatically
     @GrpcClient("ping")
     private PingServiceGrpc.PingServiceStub pingServiceStub;
 
