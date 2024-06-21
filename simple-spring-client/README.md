@@ -20,13 +20,13 @@ This repository provides a comprehensive set of code examples to make simple cli
     ```sh
     mvn spring-boot:run
     ```
-3. Or run on production
-   First, set env variables for ***RESTFUL_API_KEYSTORE*** and ***RESTFUL_API_KEYSTORE_PASSWORD*** 
+3. Or run on production\
+   * First, set env variables for ***RESTFUL_API_KEYSTORE*** and ***RESTFUL_API_KEYSTORE_PASSWORD*** 
     ```sh
    export RESTFUL_API_KEYSTORE=/etc/your_keystore.jks
    export RESTFUL_API_PASSWORD=yourkeystorepassword
    ```
-   if you don't have jks or not imported on jvm yet, you could find it the way to do that on [Working with Certificates and SSL](https://docs.oracle.com/cd/E19830-01/819-4712/ablqw/index.html).  
+   > if you don't have jks or not imported on jvm yet, you could find it the way to do that on [Working with Certificates and SSL](https://docs.oracle.com/cd/E19830-01/819-4712/ablqw/index.html).  
    * Then run spring application
    ```sh
     mvn spring-boot:run
