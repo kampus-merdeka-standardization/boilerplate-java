@@ -41,7 +41,7 @@ public class ClientAppConfig {
     @GrpcClient("ping")
     private PingServiceGrpc.PingServiceStub pingServiceStub;
 
-    @Profile({"production"})
+    @Profile({"prod"})
     @Bean("productWebClient")
     WebClient sslProductWebClient(SslContext sslContext) {
         log.info("production web client");
