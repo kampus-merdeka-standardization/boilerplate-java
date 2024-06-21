@@ -21,7 +21,7 @@ This repository provides a comprehensive set of code examples to make simple cli
     mvn spring-boot:run
     ```
 3. Or run on production
-   * First, set env variables for ***RESTFUL_API_KEYSTORE*** and ***RESTFUL_API_KEYSTORE_PASSWORD*** 
+   * First, set and export ***RESTFUL_API_KEYSTORE*** and ***RESTFUL_API_KEYSTORE_PASSWORD*** 
     ```sh
    export RESTFUL_API_KEYSTORE=/etc/your_keystore.jks
    export RESTFUL_API_PASSWORD=yourkeystorepassword
@@ -29,6 +29,7 @@ This repository provides a comprehensive set of code examples to make simple cli
    > if you don't have jks or not imported on jvm yet, you could find it the way to do that on [Working with Certificates and SSL](https://docs.oracle.com/cd/E19830-01/819-4712/ablqw/index.html).  
    * Then run spring application
    ```sh
+    PROFILE_MODE=prod
     mvn spring-boot:run
     ```
    
