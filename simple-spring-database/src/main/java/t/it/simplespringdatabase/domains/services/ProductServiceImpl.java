@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import t.it.simplespringdatabase.commons.Constants;
 import t.it.simplespringdatabase.commons.exceptions.ConflictResourceException;
 import t.it.simplespringdatabase.commons.exceptions.NotFoundResourceException;
 import t.it.simplespringdatabase.domains.repositories.ProductRepository;
@@ -82,7 +83,7 @@ public class ProductServiceImpl implements ProductService {
                                         validationException.<Mono<? extends Product>>map(Mono::error).orElseGet(() ->
                                                         productRepository
                                                                 .findProductById(updateSomeProduct.id())
-                                                                .switchIfEmpty(Mono.error(new NotFoundResourceException("the product is not found")))
+                                                                .switchIfEmpty(Mono.error(new NotFoundResourceException(Constants.PRODUCT_NOT_FOUND_MESSAGE)))
                                                                 .onErrorResume(throwable -> throwable instanceof OptimisticLockingFailureException, throwable -> Mono.error(new ConflictResourceException("the product is already changed by others")))
                                                 )
                                                 .flatMap(productEntity -> {
@@ -124,7 +125,7 @@ public class ProductServiceImpl implements ProductService {
                                         .flatMap(validationException -> validationException.<Mono<? extends Product>>map(Mono::error).orElseGet(() ->
                                                 productRepository
                                                         .findProductById(updateAllProduct.id())
-                                                        .switchIfEmpty(Mono.error(new NotFoundResourceException("the product is not found")))
+                                                        .switchIfEmpty(Mono.error(new NotFoundResourceException(Constants.PRODUCT_NOT_FOUND_MESSAGE)))
                                                         .onErrorResume(throwable -> throwable instanceof OptimisticLockingFailureException, throwable -> Mono.error(new ConflictResourceException("the product is already changed by others")))
                                         ))
                                         .flatMap(product -> productRepository.updateProduct(
@@ -151,7 +152,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Mono<String> deleteProductById(String id) {
         return productRepository.findProductById(id)
-                .switchIfEmpty(Mono.error(new NotFoundResourceException("the product is not found")))
+                .switchIfEmpty(Mono.error(new NotFoundResourceException(Constants.PRODUCT_NOT_FOUND_MESSAGE)))
                 .onErrorResume(throwable -> throwable instanceof OptimisticLockingFailureException, throwable -> Mono.error(new ConflictResourceException("the product is already changed by others")))
                 .flatMap(product ->
                         productRepository.deleteProduct(product)
@@ -162,7 +163,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Mono<PersistedProductDetail> getProductById(String id) {
         return productRepository.findProductById(id)
-                .switchIfEmpty(Mono.error(new NotFoundResourceException("the product is not found")))
+                .switchIfEmpty(Mono.error(new NotFoundResourceException(Constants.PRODUCT_NOT_FOUND_MESSAGE)))
                 .map(product -> PersistedProductDetail.builder()
                         .id(product.getId())
                         .name(product.getName())

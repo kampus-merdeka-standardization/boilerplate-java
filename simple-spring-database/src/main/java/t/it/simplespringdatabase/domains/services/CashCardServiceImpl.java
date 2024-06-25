@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
+import t.it.simplespringdatabase.commons.Constants;
 import t.it.simplespringdatabase.commons.exceptions.ConflictResourceException;
 import t.it.simplespringdatabase.commons.exceptions.NotFoundResourceException;
 import t.it.simplespringdatabase.domains.repositories.CashCardRepository;
@@ -63,7 +64,7 @@ public class CashCardServiceImpl implements CashCardService {
                                         .flatMap(validationException -> validationException.<Mono<? extends CashCard>>map(Mono::error).orElseGet(() ->
                                                 cashCardRepository
                                                         .findCashCardById(cashCardItem.id())
-                                                        .switchIfEmpty(Mono.error(new NotFoundResourceException("the cash card is not found")))
+                                                        .switchIfEmpty(Mono.error(new NotFoundResourceException(Constants.CASH_CARD_NOT_FOUND_MESSAGE)))
                                                         .onErrorResume(throwable -> throwable instanceof OptimisticLockingFailureException, throwable -> Mono.error(new ConflictResourceException("the cash card is already changed by others")))
                                         ))
                                         .flatMap(
@@ -90,7 +91,7 @@ public class CashCardServiceImpl implements CashCardService {
     @Override
     public Mono<String> deleteCashCardById(String id) {
         return cashCardRepository.findCashCardById(id)
-                .switchIfEmpty(Mono.error(new NotFoundResourceException("the cash card is not found")))
+                .switchIfEmpty(Mono.error(new NotFoundResourceException(Constants.CASH_CARD_NOT_FOUND_MESSAGE)))
                 .onErrorResume(throwable -> throwable instanceof OptimisticLockingFailureException, throwable -> Mono.error(new ConflictResourceException("the cash card is already changed by others")))
                 .flatMap(cashCard ->
                         cashCardRepository.deleteCashCard(cashCard)

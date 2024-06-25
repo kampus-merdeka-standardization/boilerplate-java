@@ -2,6 +2,7 @@ package t.it.simplespringrestserver.domains.services;
 
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+import t.it.simplespringrestserver.commons.Constants;
 import t.it.simplespringrestserver.commons.utils.StringUtils;
 import t.it.simplespringrestserver.domains.services.models.AddUser;
 import t.it.simplespringrestserver.domains.services.models.UpdateUser;
@@ -32,7 +33,7 @@ public class SimpleServiceImpl implements SimpleService {
     public Mono<CurrentUserState> updateAllFields(UpdateUser updateUser) {
         return Mono.just(CurrentUserState.builder()
                 .id(id)
-                .message(StringUtils.COMMON_GREETER_UPDATE_MESSAGE + " from " + updateUser.currentName() + " to " + updateUser.newName())
+                .message(Constants.COMMON_GREETER_UPDATE_MESSAGE + " from " + updateUser.currentName() + " to " + updateUser.newName())
                 .timestamp(Instant.now().getEpochSecond())
                 .build());
     }
@@ -41,7 +42,7 @@ public class SimpleServiceImpl implements SimpleService {
     public Mono<CurrentUserState> updateSomeFields(UpdateUser updateUser) {
         return Mono.just(CurrentUserState.builder()
                 .id(id)
-                .message(StringUtils.COMMON_GREETER_UPDATE_MESSAGE + " to " + updateUser.newName())
+                .message(Constants.COMMON_GREETER_UPDATE_MESSAGE + " to " + updateUser.newName())
                 .timestamp(Instant.now().getEpochSecond())
                 .build());
     }
