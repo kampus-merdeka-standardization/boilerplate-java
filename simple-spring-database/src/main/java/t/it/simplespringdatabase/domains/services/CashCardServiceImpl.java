@@ -43,10 +43,10 @@ public class CashCardServiceImpl implements CashCardService {
                 .flatMap(
                         cashCardRepository::addCashCard
                 ).map(cashCard -> PersistedCashCard.builder()
-                        .id(cashCard.id())
-                        .holderName(cashCard.holderName())
-                        .createdAt(cashCard.createdAt())
-                        .updatedAt(cashCard.updatedAt())
+                        .id(cashCard.getId())
+                        .holderName(cashCard.getHolderName())
+                        .createdAt(cashCard.getCreatedAt())
+                        .updatedAt(cashCard.getUpdatedAt())
                         .build())
                 .subscribeOn(Schedulers.parallel());
     }
@@ -76,10 +76,10 @@ public class CashCardServiceImpl implements CashCardService {
                 .map(
                         cashCard ->
                                 PersistedCashCard.builder()
-                                        .id(cashCard.id())
-                                        .holderName(cashCard.holderName())
-                                        .createdAt(cashCard.createdAt())
-                                        .updatedAt(cashCard.updatedAt())
+                                        .id(cashCard.getId())
+                                        .holderName(cashCard.getHolderName())
+                                        .createdAt(cashCard.getCreatedAt())
+                                        .updatedAt(cashCard.getUpdatedAt())
                                         .build()
                 )
                 .subscribeOn(Schedulers.parallel()
@@ -94,7 +94,7 @@ public class CashCardServiceImpl implements CashCardService {
                 .onErrorResume(throwable -> throwable instanceof OptimisticLockingFailureException, throwable -> Mono.error(new ConflictResourceException("the cash card is already changed by others")))
                 .flatMap(cashCard ->
                         cashCardRepository.deleteCashCard(cashCard)
-                                .subscribeOn(Schedulers.parallel()).then(Mono.fromCallable(cashCard::id)))
+                                .subscribeOn(Schedulers.parallel()).then(Mono.fromCallable(cashCard::getId)))
                 .subscribeOn(Schedulers.parallel());
     }
 
@@ -102,11 +102,11 @@ public class CashCardServiceImpl implements CashCardService {
     public Mono<PersistedCashCardDetail> getCashCardById(String id) {
         return cashCardRepository.findCashCardById(id)
                 .map(cashCard -> PersistedCashCardDetail.builder()
-                        .id(cashCard.id())
-                        .holderName(cashCard.holderName())
-                        .balance(cashCard.balance())
-                        .createdAt(cashCard.createdAt())
-                        .updatedAt(cashCard.updatedAt())
+                        .id(cashCard.getId())
+                        .holderName(cashCard.getHolderName())
+                        .balance(cashCard.getBalance())
+                        .createdAt(cashCard.getCreatedAt())
+                        .updatedAt(cashCard.getUpdatedAt())
                         .build())
                 .subscribeOn(Schedulers.parallel());
     }

@@ -10,21 +10,22 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Builder(toBuilder = true)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @With
 @Table(name = "products")
-public record Product(
-        @Id
-        String id,
-        String name,
-        String description,
-        BigDecimal price,
-        Integer quantity,
-        @Column(value = "created_at")
-        OffsetDateTime createdAt,
-        @Column(value = "updated_at")
-        OffsetDateTime updatedAt,
-        @Version
-        Long version
-) {
-
+public class Product {
+    @Id
+    private String id;
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private Integer quantity;
+    @Column(value = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(value = "updated_at")
+    private OffsetDateTime updatedAt;
+    @Version
+    private Long version;
 }

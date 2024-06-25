@@ -46,11 +46,11 @@ public class ProductServiceImpl implements ProductService {
                 .flatMap(
                         productRepository::addProduct
                 ).map(product -> PersistedProduct.builder()
-                        .id(product.id())
-                        .name(product.name())
-                        .price(product.price())
-                        .createdAt(product.createdAt())
-                        .updatedAt(product.updatedAt())
+                        .id(product.getId())
+                        .name(product.getName())
+                        .price(product.getPrice())
+                        .createdAt(product.getCreatedAt())
+                        .updatedAt(product.getUpdatedAt())
                         .build())
                 .subscribeOn(Schedulers.parallel());
     }
@@ -60,11 +60,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findProducts()
                 .map(
                         product -> PersistedProduct.builder()
-                                .id(product.id())
-                                .name(product.name())
-                                .price(product.price())
-                                .createdAt(product.createdAt())
-                                .updatedAt(product.updatedAt())
+                                .id(product.getId())
+                                .name(product.getName())
+                                .price(product.getPrice())
+                                .createdAt(product.getCreatedAt())
+                                .updatedAt(product.getUpdatedAt())
                                 .build()
                 )
                 .subscribeOn(Schedulers.parallel());
@@ -99,11 +99,11 @@ public class ProductServiceImpl implements ProductService {
                                                     );
                                                 })
                                                 .map(productEntity -> PersistedProduct.builder()
-                                                        .id(productEntity.id())
-                                                        .name(productEntity.name())
-                                                        .price(productEntity.price())
-                                                        .createdAt(productEntity.createdAt())
-                                                        .updatedAt(productEntity.updatedAt())
+                                                        .id(productEntity.getId())
+                                                        .name(productEntity.getName())
+                                                        .price(productEntity.getPrice())
+                                                        .createdAt(productEntity.getCreatedAt())
+                                                        .updatedAt(productEntity.getUpdatedAt())
                                                         .build()
                                                 )
                                                 .subscribeOn(Schedulers.parallel())
@@ -136,11 +136,11 @@ public class ProductServiceImpl implements ProductService {
                                                         .withQuantity(updateAllProduct.quantity())
                                         ))
                                         .map(product -> PersistedProduct.builder()
-                                                .id(product.id())
-                                                .name(product.name())
-                                                .price(product.price())
-                                                .createdAt(product.createdAt())
-                                                .updatedAt(product.updatedAt())
+                                                .id(product.getId())
+                                                .name(product.getName())
+                                                .price(product.getPrice())
+                                                .createdAt(product.getCreatedAt())
+                                                .updatedAt(product.getUpdatedAt())
                                                 .build())
                                         .subscribeOn(Schedulers.parallel())
                         )
@@ -155,7 +155,7 @@ public class ProductServiceImpl implements ProductService {
                 .onErrorResume(throwable -> throwable instanceof OptimisticLockingFailureException, throwable -> Mono.error(new ConflictResourceException("the product is already changed by others")))
                 .flatMap(product ->
                         productRepository.deleteProduct(product)
-                                .subscribeOn(Schedulers.parallel()).then(Mono.fromCallable(product::id)))
+                                .subscribeOn(Schedulers.parallel()).then(Mono.fromCallable(product::getId)))
                 .subscribeOn(Schedulers.parallel());
     }
 
@@ -164,13 +164,13 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findProductById(id)
                 .switchIfEmpty(Mono.error(new NotFoundResourceException("the product is not found")))
                 .map(product -> PersistedProductDetail.builder()
-                        .id(product.id())
-                        .name(product.name())
-                        .price(product.price())
-                        .quantity(product.quantity())
-                        .description(product.description())
-                        .createdAt(product.createdAt())
-                        .updatedAt(product.updatedAt())
+                        .id(product.getId())
+                        .name(product.getName())
+                        .price(product.getPrice())
+                        .quantity(product.getQuantity())
+                        .description(product.getDescription())
+                        .createdAt(product.getCreatedAt())
+                        .updatedAt(product.getUpdatedAt())
                         .build())
                 .subscribeOn(Schedulers.parallel());
     }

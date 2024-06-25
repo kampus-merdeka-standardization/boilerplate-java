@@ -1,7 +1,6 @@
 package t.it.simplespringdatabase.domains.repositories.entities;
 
-import lombok.Builder;
-import lombok.With;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.relational.core.mapping.Column;
@@ -11,19 +10,21 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 @Builder(toBuilder = true)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @With
 @Table(name = "cash_cards")
-public record CashCard(
-        @Id
-        String id,
-        @Column(value = "holder_name")
-        String holderName,
-        BigDecimal balance,
-        @Column(value = "created_at")
-        OffsetDateTime createdAt,
-        @Column(value = "updated_at")
-        OffsetDateTime updatedAt,
-        @Version
-        Long version
-) {
+public class CashCard {
+    @Id
+    private String id;
+    @Column(value = "holder_name")
+    private String holderName;
+    private BigDecimal balance;
+    @Column(value = "created_at")
+    private OffsetDateTime createdAt;
+    @Column(value = "updated_at")
+    private OffsetDateTime updatedAt;
+    @Version
+    private Long version;
 }
